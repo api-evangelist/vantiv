@@ -1,0 +1,7 @@
+aid: vantiv
+url: https://raw.githubusercontent.com/api-evangelist/vantiv/refs/heads/main/apis.yml
+modified: '2026-03-24'
+apis: []
+common:
+  - type: Website
+    url: https://www.vantiv.com
