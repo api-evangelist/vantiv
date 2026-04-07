@@ -1,7 +1,11 @@
 aid: vantiv
-url: https://raw.githubusercontent.com/api-evangelist/vantiv/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/vantiv/refs/heads/main/apis.yml
 modified: '2026-03-24'
 apis: []
 common:
   - type: Website
     url: https://www.vantiv.com
+description: >-
+  Vantiv was an American payment processing and technology provider before merging
+  with Worldpay.
