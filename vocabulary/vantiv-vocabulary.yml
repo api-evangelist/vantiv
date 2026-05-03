@@ -1,0 +1,185 @@
+vocabulary:
+  name: Vantiv Payment Processing Vocabulary
+  description: >-
+    Domain vocabulary for the Vantiv (now Worldpay from FIS) payment processing platform.
+    Covers card-not-present transactions, tokenization, chargebacks, recurring billing,
+    and ACH/eCheck payments.
+  version: "2026-05"
+  domain: Payment Processing
+  tags:
+    - Payments
+    - Finance
+    - eCommerce
+    - Payment Processing
+
+terms:
+  - term: Authorization
+    definition: >-
+      The process of verifying that a payment card has sufficient funds and placing a hold
+      on the cardholder's credit line for the transaction amount. An authorization must
+      be followed by a capture to complete settlement. Returns an authorization code.
+    related:
+      - Capture
+      - Sale
+      - Authorization Code
+
+  - term: Capture
+    definition: >-
+      The process of settling a previously authorized transaction. Initiates the transfer
+      of funds from the cardholder to the merchant. Can capture the full or partial amount
+      of the original authorization.
+    related:
+      - Authorization
+      - Settlement
+
+  - term: Sale
+    definition: >-
+      A combined authorization and capture transaction processed in a single step.
+      Also called a "capture at time of sale." Use when immediate settlement is desired
+      without a separate capture step.
+    related:
+      - Authorization
+      - Capture
+
+  - term: Credit
+    definition: >-
+      A refund transaction returning funds to a cardholder. Can be a linked credit
+      (referencing a prior captured transaction) or an unlinked credit (to any card).
+      Also called a refund.
+    related:
+      - Void
+      - Chargeback
+
+  - term: Void
+    definition: >-
+      Cancellation of a pending transaction before it has been settled. Can void
+      authorizations, captures, sales, and credits. After settlement, use Credit/Refund instead.
+    related:
+      - Credit
+      - Authorization
+
+  - term: Token
+    definition: >-
+      A surrogate value replacing a card's Primary Account Number (PAN) in the Vantiv
+      Vault. Tokens are non-reversible — the original PAN cannot be recovered from
+      the token — and can be used indefinitely for future transactions.
+    related:
+      - Vault
+      - eProtect
+      - PCI DSS
+
+  - term: Vault
+    definition: >-
+      The Vantiv secure card data storage service. Cards are tokenized and stored in
+      the Vault, reducing PCI DSS scope for merchants. Stored tokens work until
+      the cardholder changes their account number.
+    related:
+      - Token
+      - eProtect
+
+  - term: eProtect
+    definition: >-
+      Vantiv's PayPage service that prevents cardholder data from reaching merchant
+      systems. Card data is encrypted at the browser/app level and tokenized before
+      transmission to the merchant server, eliminating PCI scope for card capture.
+    related:
+      - Token
+      - Vault
+      - PCI DSS
+
+  - term: cnpTxnId
+    definition: >-
+      The Vantiv-assigned transaction identifier (Card Not Present Transaction ID).
+      Required when referencing a prior transaction for capture, void, or linked credit.
+      A 64-bit integer assigned by Vantiv for every transaction.
+    abbreviation: Card Not Present Transaction ID
+
+  - term: CNP
+    definition: >-
+      Card Not Present — transactions where the physical card is not swiped or inserted,
+      such as eCommerce and phone orders. Contrast with Card Present (CP) transactions.
+    abbreviation: Card Not Present
+
+  - term: Chargeback
+    definition: >-
+      A reversal of a payment initiated by the cardholder's bank, typically in response
+      to a dispute. The merchant has a defined window (reply-by date) to provide evidence
+      contesting the chargeback or to accept it.
+    related:
+      - Dispute
+      - Representment
+
+  - term: Representment
+    definition: >-
+      A merchant's response to a chargeback, presenting evidence that the transaction
+      was valid. If the card network accepts the representment, the funds are returned
+      to the merchant.
+    related:
+      - Chargeback
+
+  - term: AVS
+    definition: >-
+      Address Verification System — a fraud prevention tool that compares the billing
+      address provided by the customer against the address on file at the card-issuing
+      bank. Returns a single-character result code.
+    abbreviation: Address Verification System
+
+  - term: CVV
+    definition: >-
+      Card Verification Value — the 3 or 4 digit security code on a payment card (also
+      called CVV2, CVC, or CID depending on card network). Vantiv validates CVV at
+      authorization but does not store it per PCI DSS rules.
+    abbreviation: Card Verification Value
+
+  - term: PCI DSS
+    definition: >-
+      Payment Card Industry Data Security Standard — the set of security standards
+      merchants must follow when handling card data. Tokenization via Vantiv Vault
+      reduces the merchant's PCI DSS scope.
+    abbreviation: Payment Card Industry Data Security Standard
+
+  - term: ACH
+    definition: >-
+      Automated Clearing House — the US electronic bank-to-bank payment network.
+      Vantiv supports ACH payments via eCheck transactions using bank routing and
+      account numbers.
+    abbreviation: Automated Clearing House
+
+  - term: eCheck
+    definition: >-
+      An electronic check payment processed via ACH. Uses the payer's bank routing
+      number and account number to initiate a bank-to-bank transfer. Includes checking,
+      savings, and corporate account types.
+    related:
+      - ACH
+
+  - term: Recurring Billing
+    definition: >-
+      Automated periodic charges against a stored card token. Used for subscriptions,
+      installment payments, and automatic renewals. Vantiv processes recurring
+      transactions against tokens stored in the Vault.
+    related:
+      - Token
+      - Vault
+
+  - term: Merchant ID
+    definition: >-
+      The unique identifier assigned to a merchant account on the Vantiv platform.
+      Required in every API request to identify the merchant and route the transaction.
+    abbreviation: merchantId
+
+  - term: Report Group
+    definition: >-
+      A logical grouping label applied to transactions for reporting and reconciliation
+      purposes. Allows merchants to segment transactions by business unit, product line,
+      or any other categorization.
+
+  - term: Order Source
+    definition: >-
+      The channel through which a transaction was initiated. Values: ecommerce (internet
+      order), moto (mail/phone order), recurring (scheduled), installment (payment plan).
+    values:
+      - ecommerce
+      - moto
+      - recurring
+      - installment

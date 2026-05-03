@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://payments.vantivcnp.com/vap/communicator/online/registerTokenRequest",
+    "headers": {
+      "Authorization": "Basic {base64_credentials}",
+      "Content-Type": "application/xml"
+    },
+    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<litleOnlineRequest merchantId=\"123456\" version=\"12.0\" xmlns=\"http://www.litle.com/schema\">\n  <authentication>\n    <user>username</user>\n    <password>password</password>\n  </authentication>\n  <registerTokenRequest reportGroup=\"Default\" id=\"token_001\">\n    <orderId>ORD-TOKEN-001</orderId>\n    <accountNumber>4111111111111111</accountNumber>\n  </registerTokenRequest>\n</litleOnlineRequest>"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/xml"
+    },
+    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<litleOnlineResponse version=\"12.0\" response=\"0\" message=\"Valid Format\" xmlns=\"http://www.litle.com/schema\">\n  <registerTokenResponse reportGroup=\"Default\" id=\"token_001\">\n    <cnpTxnId>782011469385</cnpTxnId>\n    <orderId>ORD-TOKEN-001</orderId>\n    <response>801</response>\n    <message>Account number was successfully registered</message>\n    <litleToken>1111000100003276</litleToken>\n    <type>VI</type>\n    <echeck/>\n    <bin>411111</bin>\n  </registerTokenResponse>\n</litleOnlineResponse>"
+  }
+}

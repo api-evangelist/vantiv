@@ -1,0 +1,82 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "vantiv": "https://payments.vantivcnp.com/vap/",
+
+    "Transaction": {
+      "@id": "schema:PayAction",
+      "@type": "@id"
+    },
+    "Authorization": {
+      "@id": "vantiv:Authorization",
+      "@type": "@id"
+    },
+    "Sale": {
+      "@id": "schema:PayAction",
+      "@type": "@id"
+    },
+    "Chargeback": {
+      "@id": "vantiv:Chargeback",
+      "@type": "@id"
+    },
+
+    "merchantId": "vantiv:merchantId",
+    "id": "@id",
+    "orderId": {
+      "@id": "schema:orderNumber",
+      "@type": "xsd:string"
+    },
+    "amount": {
+      "@id": "schema:price",
+      "@type": "xsd:integer"
+    },
+    "cnpTxnId": "vantiv:cnpTxnId",
+    "response": "vantiv:responseCode",
+    "message": "schema:description",
+    "authCode": "vantiv:authorizationCode",
+    "postDate": {
+      "@id": "schema:dateCreated",
+      "@type": "xsd:date"
+    },
+    "responseTime": {
+      "@id": "schema:endDate",
+      "@type": "xsd:dateTime"
+    },
+    "orderSource": "vantiv:orderSource",
+
+    "card": {
+      "@id": "schema:paymentMethod",
+      "@type": "@id"
+    },
+    "cardType": "schema:paymentMethodId",
+    "expDate": "vantiv:expirationDate",
+    "litleToken": "vantiv:paymentToken",
+
+    "billToAddress": {
+      "@id": "schema:billingAddress",
+      "@type": "schema:PostalAddress"
+    },
+    "addressLine1": "schema:streetAddress",
+    "city": "schema:addressLocality",
+    "state": "schema:addressRegion",
+    "zip": "schema:postalCode",
+    "country": "schema:addressCountry",
+
+    "caseId": "vantiv:chargebackCaseId",
+    "reasonCode": "vantiv:chargebackReasonCode",
+    "disputeDate": {
+      "@id": "vantiv:disputeDate",
+      "@type": "xsd:date"
+    },
+    "replyByDate": {
+      "@id": "vantiv:replyByDate",
+      "@type": "xsd:date"
+    },
+    "financialImpact": {
+      "@id": "vantiv:financialImpact",
+      "@type": "xsd:boolean"
+    }
+  }
+}

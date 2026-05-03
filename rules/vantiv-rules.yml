@@ -1,0 +1,75 @@
+extends: spectral:oas
+rules:
+  vantiv-operation-summary-title-case:
+    description: All operation summaries must use Title Case
+    severity: warn
+    given: "$.paths[*][*].summary"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z0-9 ]*$"
+
+  vantiv-operation-ids-present:
+    description: All operations must have an operationId
+    severity: error
+    given: "$.paths[*][*]"
+    then:
+      field: operationId
+      function: truthy
+
+  vantiv-merchant-id-required:
+    description: Transaction requests should include merchantId
+    severity: warn
+    given: "$.components.schemas[*].properties.merchantId"
+    then:
+      function: defined
+
+  vantiv-amount-in-cents:
+    description: Transaction amounts are denominated in cents (integer)
+    severity: info
+    given: "$.components.schemas[*].properties.amount"
+    then:
+      field: type
+      function: enumeration
+      functionOptions:
+        values:
+          - integer
+
+  vantiv-xml-content-type:
+    description: Vantiv API uses application/xml content type
+    severity: warn
+    given: "$.paths[*][*].requestBody.content"
+    then:
+      function: pattern
+      functionOptions:
+        match: "application/xml"
+
+  vantiv-tags-defined:
+    description: Operations should be tagged for grouping
+    severity: warn
+    given: "$.paths[*][*]"
+    then:
+      field: tags
+      function: truthy
+
+  vantiv-cnp-txn-id-int64:
+    description: cnpTxnId fields should be int64 format
+    severity: warn
+    given: "$.components.schemas[*].properties.cnpTxnId"
+    then:
+      field: format
+      function: enumeration
+      functionOptions:
+        values:
+          - int64
+
+  vantiv-basic-auth-scheme:
+    description: Vantiv uses HTTP Basic authentication
+    severity: warn
+    given: "$.components.securitySchemes.basicAuth"
+    then:
+      field: scheme
+      function: enumeration
+      functionOptions:
+        values:
+          - basic

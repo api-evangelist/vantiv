@@ -1,0 +1,213 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Vantiv CNP API"
+  description: >-
+    Vantiv Card Not Present (CNP) payment processing API for eCommerce transactions.
+    Supports authorizations, sales, captures, credits, voids, tokenization, and
+    recurring billing. Now offered as Worldpay from FIS.
+  tags:
+    - Vantiv
+    - Payments
+    - Payment Processing
+    - eCommerce
+    - Finance
+    - Card-Not-Present
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      VANTIV_MERCHANT_ID: VANTIV_MERCHANT_ID
+      VANTIV_USERNAME: VANTIV_USERNAME
+      VANTIV_PASSWORD: VANTIV_PASSWORD
+
+capability:
+  consumes:
+    - type: http
+      namespace: vantiv-cnp
+      baseUri: https://payments.vantivcnp.com/vap/communicator/online
+      description: "Vantiv eCommerce payment processing"
+      authentication:
+        type: basic
+        username: "{{VANTIV_USERNAME}}"
+        password: "{{VANTIV_PASSWORD}}"
+      resources:
+        - name: authorization
+          path: /authorization
+          description: "Card authorization transactions"
+          operations:
+            - name: create-authorization
+              method: POST
+              description: "Authorize a card to verify funds and place a hold"
+              outputRawFormat: xml
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: sale
+          path: /sale
+          description: "Combined authorization and capture"
+          operations:
+            - name: create-sale
+              method: POST
+              description: "Process a card sale (authorize and capture in one step)"
+              outputRawFormat: xml
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: capture
+          path: /capture
+          description: "Capture authorized transactions"
+          operations:
+            - name: create-capture
+              method: POST
+              description: "Capture a previously authorized transaction for settlement"
+              outputRawFormat: xml
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: credit
+          path: /credit
+          description: "Refund transactions"
+          operations:
+            - name: create-credit
+              method: POST
+              description: "Issue a refund to a cardholder"
+              outputRawFormat: xml
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: void
+          path: /void
+          description: "Void pending transactions"
+          operations:
+            - name: create-void
+              method: POST
+              description: "Cancel a pending unsettled transaction"
+              outputRawFormat: xml
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: token
+          path: /registerTokenRequest
+          description: "Card tokenization"
+          operations:
+            - name: register-token
+              method: POST
+              description: "Tokenize a card number via Vantiv Vault"
+              outputRawFormat: xml
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: recurring
+          path: /recurringTransaction
+          description: "Recurring billing transactions"
+          operations:
+            - name: create-recurring-transaction
+              method: POST
+              description: "Process a recurring billing charge against a stored token"
+              outputRawFormat: xml
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: echeck-sale
+          path: /echeckSale
+          description: "ACH/eCheck payment processing"
+          operations:
+            - name: create-echeck-sale
+              method: POST
+              description: "Process an ACH/eCheck bank payment"
+              outputRawFormat: xml
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: vantiv-cnp-rest
+      resources:
+        - path: /v1/payments/authorizations
+          name: authorizations
+          description: "Card authorization management"
+          operations:
+            - method: POST
+              name: create-authorization
+              description: "Create card authorization"
+              call: "vantiv-cnp.create-authorization"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/payments/sales
+          name: sales
+          description: "Card sale transactions"
+          operations:
+            - method: POST
+              name: create-sale
+              description: "Create card sale"
+              call: "vantiv-cnp.create-sale"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: vantiv-cnp-mcp
+      transport: http
+      tools:
+        - name: create-authorization
+          description: "Authorize a credit card transaction"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "vantiv-cnp.create-authorization"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-sale
+          description: "Process a card sale transaction (authorize and capture)"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "vantiv-cnp.create-sale"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: create-credit
+          description: "Issue a refund to a cardholder"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "vantiv-cnp.create-credit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: register-token
+          description: "Tokenize a card number for secure storage"
+          hints:
+            readOnly: false
+            destructive: false
+          call: "vantiv-cnp.register-token"
+          outputParameters:
+            - type: object
+              mapping: "$."

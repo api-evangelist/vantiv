@@ -1,0 +1,363 @@
+openapi: 3.1.0
+info:
+  title: Vantiv Chargeback API
+  description: >-
+    The Vantiv Chargeback API provides programmatic access to chargeback and dispute
+    management. Merchants can retrieve chargeback details, upload evidence documents,
+    respond to disputes, and manage the entire chargeback lifecycle. This API is used
+    to defend against fraudulent disputes and retrieve chargeback settlement information.
+  version: '2.0'
+  contact:
+    name: Worldpay Developer Hub
+    url: https://developer.worldpay.com
+  license:
+    name: Proprietary
+    url: https://developer.vantiv.com/community/ecommerce
+servers:
+  - url: https://services.vantivprelive.com/services/chargebacks
+    description: Vantiv Pre-Live (Staging) Environment
+  - url: https://services.vantivcnp.com/services/chargebacks
+    description: Vantiv Production Environment
+security:
+  - basicAuth: []
+paths:
+  /chargebacks:
+    get:
+      operationId: listChargebacks
+      summary: List Chargebacks
+      description: Retrieve a list of chargebacks with optional date range and status filters.
+      tags:
+        - Chargebacks
+      parameters:
+        - name: date
+          in: query
+          schema:
+            type: string
+            format: date
+          description: Filter chargebacks by activity date (YYYY-MM-DD)
+        - name: financialImpact
+          in: query
+          schema:
+            type: boolean
+          description: Filter to only return chargebacks with financial impact
+        - name: responded
+          in: query
+          schema:
+            type: boolean
+          description: Filter by whether the chargeback has been responded to
+      responses:
+        '200':
+          description: List of chargebacks
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ChargebackListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /chargebacks/{caseId}:
+    get:
+      operationId: getChargeback
+      summary: Get Chargeback
+      description: Retrieve detailed information about a specific chargeback case.
+      tags:
+        - Chargebacks
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Unique chargeback case identifier
+      responses:
+        '200':
+          description: Chargeback details
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ChargebackResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /chargebacks/{caseId}/response:
+    put:
+      operationId: respondToChargeback
+      summary: Respond To Chargeback
+      description: >-
+        Submit a merchant response to a chargeback dispute. The response may
+        include accepting the chargeback or providing a rebuttal.
+      tags:
+        - Chargebacks
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Unique chargeback case identifier
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/ChargebackResponseRequest'
+      responses:
+        '200':
+          description: Response submitted successfully
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/ChargebackUpdateResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /chargebacks/{caseId}/documents:
+    get:
+      operationId: listChargebackDocuments
+      summary: List Chargeback Documents
+      description: List all evidence documents uploaded for a chargeback case.
+      tags:
+        - Documents
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Unique chargeback case identifier
+      responses:
+        '200':
+          description: List of uploaded documents
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DocumentListResponse'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    post:
+      operationId: uploadChargebackDocument
+      summary: Upload Chargeback Document
+      description: Upload an evidence document to support a chargeback dispute response.
+      tags:
+        - Documents
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+          description: Unique chargeback case identifier
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Evidence document file (PDF, JPG, PNG)
+      responses:
+        '200':
+          description: Document uploaded successfully
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/DocumentUploadResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+  /chargebacks/{caseId}/documents/{documentId}:
+    delete:
+      operationId: deleteChargebackDocument
+      summary: Delete Chargeback Document
+      description: Remove a previously uploaded evidence document from a chargeback case.
+      tags:
+        - Documents
+      parameters:
+        - name: caseId
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+        - name: documentId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: Document identifier
+      responses:
+        '200':
+          description: Document deleted successfully
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Chargeback case not found
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    Chargeback:
+      type: object
+      properties:
+        caseId:
+          type: integer
+          format: int64
+          description: Unique case identifier
+        merchantId:
+          type: string
+          description: Merchant account identifier
+        cnpTxnId:
+          type: integer
+          format: int64
+          description: Original transaction ID
+        amount:
+          type: integer
+          description: Disputed amount in cents
+        reasonCode:
+          type: string
+          description: Card network chargeback reason code
+        reasonCodeDescription:
+          type: string
+          description: Description of the dispute reason
+        disputeDate:
+          type: string
+          format: date
+          description: Date dispute was initiated
+        replyByDate:
+          type: string
+          format: date
+          description: Deadline to respond to the chargeback
+        activity:
+          type: string
+          enum:
+            - ASSIGNED
+            - CONTESTED
+            - WITHDRAWN
+            - REPRESENTMENT
+            - PRE_ARB
+            - ARBITRATION
+            - ISSUER_DECLINED
+            - MERCHANT_ACCEPTED
+          description: Current chargeback lifecycle activity
+        financialImpact:
+          type: boolean
+          description: Whether this chargeback has a financial impact
+
+    ChargebackListResponse:
+      type: object
+      properties:
+        chargebackCase:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chargeback'
+
+    ChargebackResponse:
+      type: object
+      properties:
+        chargebackCase:
+          $ref: '#/components/schemas/Chargeback'
+
+    ChargebackResponseRequest:
+      type: object
+      required:
+        - activity
+      properties:
+        activity:
+          type: string
+          enum:
+            - MERCHANT_ACCEPTS
+            - MERCHANT_CONTESTS
+          description: Merchant response type
+        note:
+          type: string
+          description: Optional response note or rebuttal
+
+    ChargebackUpdateResponse:
+      type: object
+      properties:
+        transactionId:
+          type: integer
+          format: int64
+          description: Response transaction ID
+
+    Document:
+      type: object
+      properties:
+        documentId:
+          type: string
+          description: Document identifier
+        documentType:
+          type: string
+          description: Document MIME type
+        size:
+          type: integer
+          description: Document size in bytes
+
+    DocumentListResponse:
+      type: object
+      properties:
+        documentList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+
+    DocumentUploadResponse:
+      type: object
+      properties:
+        documentId:
+          type: string
+          description: Assigned document identifier
+
+    ErrorResponse:
+      type: object
+      properties:
+        response:
+          type: string
+        message:
+          type: string
+
+tags:
+  - name: Chargebacks
+    description: Chargeback dispute retrieval and response management
+  - name: Documents
+    description: Evidence document upload and management for chargebacks

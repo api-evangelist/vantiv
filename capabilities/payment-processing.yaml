@@ -1,0 +1,232 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "Vantiv Payment Processing"
+  description: >-
+    Unified payment processing workflow combining Vantiv's eCommerce CNP API and chargeback
+    management. Designed for merchants processing online card payments, managing refunds,
+    tokenizing card data for recurring billing, and defending chargeback disputes.
+  tags:
+    - Vantiv
+    - Payments
+    - Payment Processing
+    - eCommerce
+    - Finance
+    - Chargebacks
+  created: "2026-05-03"
+  modified: "2026-05-03"
+
+binds:
+  - namespace: env
+    keys:
+      VANTIV_MERCHANT_ID: VANTIV_MERCHANT_ID
+      VANTIV_USERNAME: VANTIV_USERNAME
+      VANTIV_PASSWORD: VANTIV_PASSWORD
+
+capability:
+  consumes:
+    - import: vantiv-cnp
+      location: ./shared/vantiv-cnp.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: vantiv-payments-api
+      description: "Unified REST API for Vantiv payment processing workflows."
+      resources:
+        - path: /v1/payments/authorizations
+          name: authorizations
+          description: "Card authorization management"
+          operations:
+            - method: POST
+              name: create-authorization
+              description: "Authorize a card and hold funds"
+              call: "vantiv-cnp.create-authorization"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/payments/sales
+          name: sales
+          description: "Card sale transactions"
+          operations:
+            - method: POST
+              name: create-sale
+              description: "Process a card sale (authorize and capture)"
+              call: "vantiv-cnp.create-sale"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/payments/captures
+          name: captures
+          description: "Capture authorized funds"
+          operations:
+            - method: POST
+              name: create-capture
+              description: "Capture an authorized transaction for settlement"
+              call: "vantiv-cnp.create-capture"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/payments/credits
+          name: credits
+          description: "Refund management"
+          operations:
+            - method: POST
+              name: create-credit
+              description: "Issue a refund to a cardholder"
+              call: "vantiv-cnp.create-credit"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/payments/voids
+          name: voids
+          description: "Void pending transactions"
+          operations:
+            - method: POST
+              name: create-void
+              description: "Cancel a pending unsettled transaction"
+              call: "vantiv-cnp.create-void"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/tokens
+          name: tokens
+          description: "Card tokenization via Vault"
+          operations:
+            - method: POST
+              name: register-token
+              description: "Tokenize a card number for secure storage"
+              call: "vantiv-cnp.register-token"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/payments/recurring
+          name: recurring
+          description: "Recurring billing transactions"
+          operations:
+            - method: POST
+              name: create-recurring-transaction
+              description: "Process a recurring billing charge"
+              call: "vantiv-cnp.create-recurring-transaction"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+        - path: /v1/payments/echeck
+          name: echeck
+          description: "ACH/eCheck payments"
+          operations:
+            - method: POST
+              name: create-echeck-sale
+              description: "Process an ACH bank payment"
+              call: "vantiv-cnp.create-echeck-sale"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: vantiv-payments-mcp
+      transport: http
+      description: "MCP server for AI-assisted payment processing and dispute management."
+      tools:
+        - name: authorize-card
+          description: "Authorize a credit card payment to verify funds availability"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "vantiv-cnp.create-authorization"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: process-sale
+          description: "Process a complete card sale (authorization and capture in one step)"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "vantiv-cnp.create-sale"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: capture-payment
+          description: "Capture a previously authorized payment to initiate settlement"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: true
+          call: "vantiv-cnp.create-capture"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: refund-payment
+          description: "Issue a full or partial refund to a cardholder"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "vantiv-cnp.create-credit"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: void-payment
+          description: "Cancel a pending transaction before it settles"
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "vantiv-cnp.create-void"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: tokenize-card
+          description: "Tokenize a card number for secure storage and future transactions"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "vantiv-cnp.register-token"
+          with:
+            accountNumber: "tools.cardNumber"
+            orderId: "tools.orderId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: process-recurring-charge
+          description: "Process a recurring billing charge against a stored card token"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "vantiv-cnp.create-recurring-transaction"
+          with:
+            token: "tools.token"
+            amount: "tools.amount"
+            orderId: "tools.orderId"
+          outputParameters:
+            - type: object
+              mapping: "$."
+
+        - name: process-echeck-payment
+          description: "Process an ACH/eCheck payment using bank account details"
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "vantiv-cnp.create-echeck-sale"
+          outputParameters:
+            - type: object
+              mapping: "$."

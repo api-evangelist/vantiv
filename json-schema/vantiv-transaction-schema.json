@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/vantiv/main/json-schema/vantiv-transaction-schema.json",
+  "title": "Vantiv Transaction",
+  "description": "A payment transaction processed through the Vantiv CNP API",
+  "type": "object",
+  "required": ["merchantId", "id", "orderId", "amount"],
+  "properties": {
+    "merchantId": {
+      "type": "string",
+      "description": "Vantiv merchant account identifier"
+    },
+    "id": {
+      "type": "string",
+      "maxLength": 25,
+      "description": "Unique request identifier (max 25 characters)"
+    },
+    "orderId": {
+      "type": "string",
+      "description": "Merchant-assigned order identifier"
+    },
+    "amount": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Transaction amount in cents (e.g., $10.00 = 1000)"
+    },
+    "cnpTxnId": {
+      "type": "integer",
+      "format": "int64",
+      "description": "Vantiv-assigned transaction ID for downstream operations"
+    },
+    "response": {
+      "type": "string",
+      "description": "Response code (000 = Approved)"
+    },
+    "message": {
+      "type": "string",
+      "description": "Human-readable response message"
+    },
+    "authCode": {
+      "type": "string",
+      "description": "Authorization code from card network"
+    },
+    "orderSource": {
+      "type": "string",
+      "enum": ["ecommerce", "moto", "recurring", "installment"],
+      "description": "Channel through which the order was placed"
+    },
+    "postDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the transaction was posted"
+    },
+    "responseTime": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the authorization response"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "name": "VantivTransaction",
+  "description": "Payment transaction processed through the Vantiv CNP API",
+  "fields": [
+    { "name": "merchantId", "type": "string", "required": true, "description": "Merchant account ID" },
+    { "name": "id", "type": "string", "required": true, "description": "Request ID (max 25 chars)" },
+    { "name": "orderId", "type": "string", "required": true, "description": "Merchant order identifier" },
+    { "name": "amount", "type": "integer", "required": true, "description": "Amount in cents" },
+    { "name": "cnpTxnId", "type": "integer(int64)", "required": false, "description": "Vantiv transaction ID" },
+    { "name": "response", "type": "string", "required": false, "description": "Response code (000=Approved)" },
+    { "name": "message", "type": "string", "required": false, "description": "Response message" },
+    { "name": "authCode", "type": "string", "required": false, "description": "Auth code from network" },
+    { "name": "orderSource", "type": "enum", "required": false, "values": ["ecommerce", "moto", "recurring", "installment"], "description": "Order channel" },
+    { "name": "postDate", "type": "date", "required": false, "description": "Post date" },
+    { "name": "card", "type": "CardType", "required": false, "description": "Card details" },
+    { "name": "billToAddress", "type": "AddressType", "required": false, "description": "Billing address for AVS" }
+  ],
+  "nested": [
+    {
+      "name": "CardType",
+      "fields": [
+        { "name": "type", "type": "enum", "values": ["VI", "MC", "AX", "DI", "JC"], "description": "Card brand" },
+        { "name": "number", "type": "string", "description": "Card PAN or token" },
+        { "name": "expDate", "type": "string", "description": "Expiration MMYY" },
+        { "name": "cardValidationNum", "type": "string", "description": "CVV code" }
+      ]
+    },
+    {
+      "name": "AddressType",
+      "fields": [
+        { "name": "name", "type": "string", "description": "Cardholder name" },
+        { "name": "addressLine1", "type": "string", "description": "Street address" },
+        { "name": "city", "type": "string", "description": "City" },
+        { "name": "state", "type": "string", "description": "State code" },
+        { "name": "zip", "type": "string", "description": "Postal code" },
+        { "name": "country", "type": "string", "description": "Country code" }
+      ]
+    }
+  ]
+}

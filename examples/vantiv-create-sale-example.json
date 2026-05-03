@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "https://payments.vantivcnp.com/vap/communicator/online/sale",
+    "headers": {
+      "Authorization": "Basic {base64_credentials}",
+      "Content-Type": "application/xml"
+    },
+    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<litleOnlineRequest merchantId=\"123456\" version=\"12.0\" xmlns=\"http://www.litle.com/schema\">\n  <authentication>\n    <user>username</user>\n    <password>password</password>\n  </authentication>\n  <sale reportGroup=\"Default\" id=\"order_001\">\n    <orderId>ORD-2026-001</orderId>\n    <amount>2999</amount>\n    <orderSource>ecommerce</orderSource>\n    <card>\n      <type>VI</type>\n      <number>4111111111111111</number>\n      <expDate>1228</expDate>\n      <cardValidationNum>349</cardValidationNum>\n    </card>\n    <billToAddress>\n      <name>John Smith</name>\n      <addressLine1>123 Main St</addressLine1>\n      <city>Anytown</city>\n      <state>MA</state>\n      <zip>02101</zip>\n      <country>US</country>\n    </billToAddress>\n  </sale>\n</litleOnlineRequest>"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/xml"
+    },
+    "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<litleOnlineResponse version=\"12.0\" response=\"0\" message=\"Valid Format\" xmlns=\"http://www.litle.com/schema\">\n  <saleResponse reportGroup=\"Default\" id=\"order_001\">\n    <cnpTxnId>782011469384</cnpTxnId>\n    <orderId>ORD-2026-001</orderId>\n    <response>000</response>\n    <responseTime>2026-05-03T12:00:00Z</responseTime>\n    <postDate>2026-05-03</postDate>\n    <message>Approved</message>\n    <authCode>11111</authCode>\n    <avsResult>01</avsResult>\n    <cardValidationResult>M</cardValidationResult>\n  </saleResponse>\n</litleOnlineResponse>"
+  }
+}
