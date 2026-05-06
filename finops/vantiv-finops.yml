@@ -1,5 +1,6 @@
 specification: FinOps Framework
 specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
 alignedWith:
   framework: FinOps Foundation Framework
   frameworkUrl: https://www.finops.org/framework/
@@ -8,145 +9,73 @@ alignedWith:
   dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
 provider: Vantiv
 providerId: vantiv
-publisherName: Vantiv
-serviceCategory: API
+publisherName: Worldpay (Vantiv legacy brand)
+serviceCategory: Payments
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: true
 tags:
   - Payments
   - Payment Processing
-  - eCommerce
-  - Finance
-  - FinTech
   - FinOps
-  - Cost Management
   - FOCUS
-description: FinOps framework definition for the Vantiv API surface. Provides a FOCUS-aligned mapping
-  for cost allocation, usage measurement, and unit-economics reporting across the provider's APIs.
-principles:
-  - name: Visibility
-    description: Make API consumption costs visible to engineering, product, and finance teams in near
-      real-time.
-  - name: Allocation
-    description: Tag every chargeable API call with the consuming team, environment, application, and
-      feature so cost can be allocated.
-  - name: Optimization
-    description: Continuously evaluate request patterns, caching, batching, and tier selection to reduce
-      cost per useful unit of work.
-  - name: Accountability
-    description: Establish budget owners and chargeback or showback flows for each consuming team.
-domains:
-  - name: Understand Usage and Cost
-    capabilities:
-      - Data Ingestion
-      - Allocation
-      - Reporting and Analytics
-      - Anomaly Management
-  - name: Quantify Business Value
-    capabilities:
-      - Planning and Estimating
-      - Forecasting
-      - Budgeting
-      - Benchmarking
-      - Unit Economics
-  - name: Optimize Usage and Cost
-    capabilities:
-      - Architecting for Cloud
-      - Rate Optimization
-      - Workload Optimization
-      - Cloud Sustainability
-      - Licensing and SaaS
-  - name: Manage the FinOps Practice
-    capabilities:
-      - FinOps Practice Operations
-      - FinOps Education and Enablement
-      - Invoicing and Chargeback
-      - Onboarding Workloads
-      - Intersecting Disciplines
+description: 'FOCUS-aligned FinOps for Vantiv (now Worldpay): per-transaction authorisation fee plus monthly recurring service/equipment fees and chargeback charges. Bespoke pricing replaces the indicative rate card based on volume, MCC, and channel.'
+sources:
+  - https://go.worldpay.com/pricing
+  - https://docs.worldpay.com/access/
 billingModel:
-  pricingCategory: Usage-Based
+  pricingCategory: Take Rate + Subscription
   billingFrequency: Monthly
-  billingCurrency: USD
+  billingCurrency: GBP
   chargeCategories:
     - Usage
     - Purchase
-    - Tax
-    - Credit
     - Adjustment
-  chargeFrequency: Recurring
+    - Refund
 focusColumns:
-  ServiceName: Vantiv
-  ServiceCategory: Developer Tools / API
-  ProviderName: Vantiv
-  PublisherName: Vantiv
-  InvoiceIssuerName: Vantiv
-  PricingCategory: Usage-Based
-  PricingUnit: request
-  BillingCurrency: USD
+  ServiceName: Worldpay (Vantiv)
+  ServiceCategory: Payments
+  ProviderName: Worldpay
+  PublisherName: Worldpay
+  InvoiceIssuerName: Worldpay
+  BillingCurrency: GBP
   ChargeCategory: Usage
 meters:
-  - name: api_requests
-    description: Count of billable API requests
-    unit: request
+  - name: card_authorisations
+    description: Card authorisation requests, billed at the flat per-transaction auth fee
+    unit: transaction
     aggregation: sum
     dimensions:
-      - api
-      - endpoint
-      - tier
-      - region
-      - consumer
-  - name: data_egress
-    description: Bytes returned over the network in API responses
-    unit: GB
+      - card_brand
+      - channel
+      - mcc
+  - name: pos_terminal_months
+    description: Active POS terminal months billed at the monthly terminal fee
+    unit: terminal-month
+    aggregation: sum
+  - name: pci_dss_months
+    description: PCI DSS service months billed at the monthly PCI fee
+    unit: month
+    aggregation: sum
+  - name: minimum_service
+    description: Minimum monthly service charge applied when usage fees fall below the floor
+    unit: month
+    aggregation: sum
+  - name: chargebacks
+    description: Chargebacks billed at the per-event fee
+    unit: chargeback
     aggregation: sum
     dimensions:
-      - api
-      - region
-      - consumer
-  - name: compute_seconds
-    description: Server-side compute consumed by the request, where applicable
-    unit: second
-    aggregation: sum
-    dimensions:
-      - api
-      - endpoint
-      - tier
-apis:
-  - name: Vantiv CNP API
-    baseURL: https://payments.vantivprelive.com/vap/communicator/online
-    tags:
-      - Payments
-      - Payment Processing
-      - eCommerce
-      - Finance
-      - Card-Not-Present
-    serviceName: Vantiv CNP API
-    serviceCategory: API
-  - name: Vantiv Express API
-    baseURL: https://api.vantivintegrationtest.com/express/v1
-    tags:
-      - Payments
-      - Payment Processing
-      - Point Of Sale
-      - Finance
-    serviceName: Vantiv Express API
-    serviceCategory: API
-  - name: Vantiv Chargeback API
-    baseURL: https://services.vantivprelive.com/services/chargebacks
-    tags:
-      - Payments
-      - Chargebacks
-      - Finance
-      - Dispute Management
-    serviceName: Vantiv Chargeback API
-    serviceCategory: API
-unitEconomics:
-  - name: Cost per 1K Requests
-    metric: billed_cost / (api_requests / 1000)
-    target: TBD
-  - name: Cost per Active Consumer
-    metric: billed_cost / active_consumers
-    target: TBD
+      - reason_code
+principles:
+  - name: Visibility
+    description: Reconcile monthly Worldpay statements against transaction logs by channel (in-person vs online/phone) and card brand; capture WP-CorrelationId for any disputed line.
+  - name: Allocation
+    description: Allocate by MID/store and by channel using Worldpay reporting; tag transactions with internal location/department identifiers in the merchant reference.
+  - name: Optimization
+    description: Lower effective cost by submitting an updated turnover/AVT questionnaire to renegotiate the bespoke rate card; reduce chargebacks via 3DS, address checks, and risk rules.
+  - name: Accountability
+    description: Owner is the merchant's payments/finance team; review monthly minimum-service and PCI DSS charges and reconcile chargeback fees against dispute resolution outcomes.
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
