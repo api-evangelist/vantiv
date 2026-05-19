@@ -1,0 +1,123 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Vantiv CNP API — Tokenization
+  description: 'Vantiv CNP API — Tokenization. 2 operations. Lead operation: Register Token. Self-contained Naftiko capability
+    covering one Vantiv business surface.'
+  tags:
+  - Vantiv
+  - Tokenization
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    VANTIV_API_KEY: VANTIV_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cnp-tokenization
+    baseUri: https://payments.vantivprelive.com/vap/communicator/online
+    description: Vantiv CNP API — Tokenization business capability. Self-contained, no shared references.
+    resources:
+    - name: registerTokenRequest
+      path: /registerTokenRequest
+      operations:
+      - name: registertoken
+        method: POST
+        description: Register Token
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: updateCardValidationNumRequest
+      path: /updateCardValidationNumRequest
+      operations:
+      - name: updatecardvalidationnumber
+        method: POST
+        description: Update Card Validation Number
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.VANTIV_USER}}'
+      password: '{{env.VANTIV_PASS}}'
+  exposes:
+  - type: rest
+    namespace: cnp-tokenization-rest
+    port: 8080
+    description: REST adapter for Vantiv CNP API — Tokenization. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/registertokenrequest
+      name: registertokenrequest
+      description: REST surface for registerTokenRequest.
+      operations:
+      - method: POST
+        name: registertoken
+        description: Register Token
+        call: cnp-tokenization.registertoken
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/updatecardvalidationnumrequest
+      name: updatecardvalidationnumrequest
+      description: REST surface for updateCardValidationNumRequest.
+      operations:
+      - method: POST
+        name: updatecardvalidationnumber
+        description: Update Card Validation Number
+        call: cnp-tokenization.updatecardvalidationnumber
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cnp-tokenization-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Vantiv CNP API — Tokenization. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: register-token
+      description: Register Token
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cnp-tokenization.registertoken
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-card-validation-number
+      description: Update Card Validation Number
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cnp-tokenization.updatecardvalidationnumber
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
