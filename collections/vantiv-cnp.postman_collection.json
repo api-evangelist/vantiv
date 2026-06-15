@@ -1,0 +1,2132 @@
+{
+  "item": [
+    {
+      "id": "b638bb95-84ba-46e3-b5a4-67a5b4d08b24",
+      "name": "Authorizations",
+      "description": {
+        "content": "Card authorization and fund verification",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "aca51721-a411-464e-9126-b8c0e8feeb9d",
+          "name": "Create Authorization",
+          "request": {
+            "name": "Create Authorization",
+            "description": {
+              "content": "Authorize a card transaction to verify funds availability and place a hold on the cardholder's credit line. Returns an authorization code that must be captured to complete the transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "authorization"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <orderSource>(string)</orderSource>\n  <card>\n    <type>(string)</type>\n    <number>(string)</number>\n    <expDate>(string)</expDate>\n    <cardValidationNum>(string)</cardValidationNum>\n  </card>\n  <billToAddress>\n    <name>(string)</name>\n    <addressLine1>(string)</addressLine1>\n    <city>(string)</city>\n    <state>(string)</state>\n    <zip>(string)</zip>\n    <country>(string)</country>\n  </billToAddress>\n  <customerInfo>\n    <ssn>(string)</ssn>\n    <dob>(string)</dob>\n  </customerInfo>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "406ca06e-8e79-4c6a-9040-d06bb76d8585",
+              "name": "Authorization response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <orderSource>(string)</orderSource>\n  <card>\n    <type>(string)</type>\n    <number>(string)</number>\n    <expDate>(string)</expDate>\n    <cardValidationNum>(string)</cardValidationNum>\n  </card>\n  <billToAddress>\n    <name>(string)</name>\n    <addressLine1>(string)</addressLine1>\n    <city>(string)</city>\n    <state>(string)</state>\n    <zip>(string)</zip>\n    <country>(string)</country>\n  </billToAddress>\n  <customerInfo>\n    <ssn>(string)</ssn>\n    <dob>(string)</dob>\n  </customerInfo>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <reportGroup>(string)</reportGroup>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <orderId>(string)</orderId>\n  <response>(string)</response>\n  <responseTime>(string)</responseTime>\n  <postDate>(string)</postDate>\n  <message>(string)</message>\n  <authCode>(string)</authCode>\n  <avsResult>(string)</avsResult>\n  <cardValidationResult>(string)</cardValidationResult>\n  <fraudResult>\n    <avsResult>(string)</avsResult>\n    <cardValidationResult>(string)</cardValidationResult>\n  </fraudResult>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "b8da081c-245f-45e8-9fa8-1ca2f3bda47a",
+              "name": "Bad request — malformed XML or invalid transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <orderSource>(string)</orderSource>\n  <card>\n    <type>(string)</type>\n    <number>(string)</number>\n    <expDate>(string)</expDate>\n    <cardValidationNum>(string)</cardValidationNum>\n  </card>\n  <billToAddress>\n    <name>(string)</name>\n    <addressLine1>(string)</addressLine1>\n    <city>(string)</city>\n    <state>(string)</state>\n    <zip>(string)</zip>\n    <country>(string)</country>\n  </billToAddress>\n  <customerInfo>\n    <ssn>(string)</ssn>\n    <dob>(string)</dob>\n  </customerInfo>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "0b77b8da-0c5a-4d2e-8b60-ba8fe8968851",
+              "name": "Unauthorized — invalid merchant credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "authorization"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <orderSource>(string)</orderSource>\n  <card>\n    <type>(string)</type>\n    <number>(string)</number>\n    <expDate>(string)</expDate>\n    <cardValidationNum>(string)</cardValidationNum>\n  </card>\n  <billToAddress>\n    <name>(string)</name>\n    <addressLine1>(string)</addressLine1>\n    <city>(string)</city>\n    <state>(string)</state>\n    <zip>(string)</zip>\n    <country>(string)</country>\n  </billToAddress>\n  <customerInfo>\n    <ssn>(string)</ssn>\n    <dob>(string)</dob>\n  </customerInfo>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "7b894fae-6f14-4aec-bc3f-b5b90bc21e0e",
+      "name": "Sales",
+      "description": {
+        "content": "Combined authorization and capture transactions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "de573d8b-0d26-4231-b88a-81db6794fbd1",
+          "name": "Create Sale",
+          "request": {
+            "name": "Create Sale",
+            "description": {
+              "content": "Process an authorization and capture in a single step. Use for transactions where you want to immediately settle funds without a separate capture step.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "sale"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <orderSource>(string)</orderSource>\n  <card>\n    <type>(string)</type>\n    <number>(string)</number>\n    <expDate>(string)</expDate>\n    <cardValidationNum>(string)</cardValidationNum>\n  </card>\n  <billToAddress>\n    <name>(string)</name>\n    <addressLine1>(string)</addressLine1>\n    <city>(string)</city>\n    <state>(string)</state>\n    <zip>(string)</zip>\n    <country>(string)</country>\n  </billToAddress>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fc0d92f2-f653-4d94-8cc7-3ac8275b8fe0",
+              "name": "Sale response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sale"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <orderSource>(string)</orderSource>\n  <card>\n    <type>(string)</type>\n    <number>(string)</number>\n    <expDate>(string)</expDate>\n    <cardValidationNum>(string)</cardValidationNum>\n  </card>\n  <billToAddress>\n    <name>(string)</name>\n    <addressLine1>(string)</addressLine1>\n    <city>(string)</city>\n    <state>(string)</state>\n    <zip>(string)</zip>\n    <country>(string)</country>\n  </billToAddress>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <orderId>(string)</orderId>\n  <response>(string)</response>\n  <message>(string)</message>\n  <authCode>(string)</authCode>\n  <avsResult>(string)</avsResult>\n  <cardValidationResult>(string)</cardValidationResult>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "ddc08b06-4543-4281-a53c-cf83f2316a5f",
+              "name": "Bad request — malformed XML or invalid transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sale"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <orderSource>(string)</orderSource>\n  <card>\n    <type>(string)</type>\n    <number>(string)</number>\n    <expDate>(string)</expDate>\n    <cardValidationNum>(string)</cardValidationNum>\n  </card>\n  <billToAddress>\n    <name>(string)</name>\n    <addressLine1>(string)</addressLine1>\n    <city>(string)</city>\n    <state>(string)</state>\n    <zip>(string)</zip>\n    <country>(string)</country>\n  </billToAddress>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "87630a96-a57e-4941-9198-9e1a38aff677",
+              "name": "Unauthorized — invalid merchant credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "sale"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <orderSource>(string)</orderSource>\n  <card>\n    <type>(string)</type>\n    <number>(string)</number>\n    <expDate>(string)</expDate>\n    <cardValidationNum>(string)</cardValidationNum>\n  </card>\n  <billToAddress>\n    <name>(string)</name>\n    <addressLine1>(string)</addressLine1>\n    <city>(string)</city>\n    <state>(string)</state>\n    <zip>(string)</zip>\n    <country>(string)</country>\n  </billToAddress>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "acc98ead-8e6b-4498-833f-2023bf34bcd3",
+      "name": "Captures",
+      "description": {
+        "content": "Capture previously authorized transactions for settlement",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7ac3bdef-4b92-4189-a9c6-12dfb9ede57b",
+          "name": "Create Capture",
+          "request": {
+            "name": "Create Capture",
+            "description": {
+              "content": "Capture a previously authorized transaction to initiate settlement. Must reference a valid authorization transaction ID. Can capture partial amounts.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "capture"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <amount>(integer)</amount>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "16d6ceda-e97e-48a7-870a-23aaff70ee04",
+              "name": "Capture response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <amount>(integer)</amount>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <response>(string)</response>\n  <message>(string)</message>\n  <postDate>(string)</postDate>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "0e60b1c8-2d18-4ed2-9a80-75aea1a9d481",
+              "name": "Bad request — malformed XML or invalid transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <amount>(integer)</amount>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "898c9e7c-72ba-4829-8791-a5d6c9c91675",
+              "name": "Unauthorized — invalid merchant credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "capture"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <amount>(integer)</amount>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5b8df120-4371-43c0-a648-6456d29ae348",
+      "name": "Credits",
+      "description": {
+        "content": "Refunds and credits to cardholder accounts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bab1e719-63e0-4937-85f9-4af4b6a01363",
+          "name": "Create Credit",
+          "request": {
+            "name": "Create Credit",
+            "description": {
+              "content": "Issue a refund to a cardholder. Can be a full or partial refund of a previously captured transaction, or an unlinked credit to any card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "credit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4ab39acc-457e-452a-b2e8-c7fe0ac4e056",
+              "name": "Credit response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "dcfc4d72-7ae9-43ae-9508-5bae1069bd69",
+              "name": "Bad request — malformed XML or invalid transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "9ec97525-6690-4fc9-94ea-aefcf69c4999",
+              "name": "Unauthorized — invalid merchant credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b0db432c-da86-4664-9dea-96eeac9fe266",
+      "name": "Voids",
+      "description": {
+        "content": "Cancel pending unsettled transactions",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8d019ff2-51db-4f9c-b1ac-b782bd5ceb17",
+          "name": "Create Void",
+          "request": {
+            "name": "Create Void",
+            "description": {
+              "content": "Cancel a pending transaction before it is settled. Can void authorizations, captures, sales, and credits that have not yet been settled.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "void"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6ac9df5c-d2a4-4a27-a2c8-a6ea110093b8",
+              "name": "Void response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "776a3e52-00ba-4345-9eeb-3079165783c8",
+              "name": "Bad request — malformed XML or invalid transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "8bc1599f-472c-4e38-afca-5db16f281ccf",
+              "name": "Unauthorized — invalid merchant credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "void"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "0d95702f-11df-4a64-b5ae-0439030bf36d",
+      "name": "Tokenization",
+      "description": {
+        "content": "Card data tokenization via Vantiv Vault",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "67487104-a62c-4d6d-a501-0d323a29fb2f",
+          "name": "Register Token",
+          "request": {
+            "name": "Register Token",
+            "description": {
+              "content": "Tokenize a payment card number into a secure token via the Vantiv Vault. The token can be used for subsequent transactions without storing raw card data, reducing PCI scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "registerTokenRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <accountNumber>(string)</accountNumber>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "84059528-a5cf-4233-9162-d1b5615f4e67",
+              "name": "Token registration response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registerTokenRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <accountNumber>(string)</accountNumber>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <orderId>(string)</orderId>\n  <response>(string)</response>\n  <message>(string)</message>\n  <litleToken>(string)</litleToken>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "2704b24f-5d25-4b33-8c81-d7f8083176c0",
+              "name": "Bad request — malformed XML or invalid transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registerTokenRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <accountNumber>(string)</accountNumber>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "9e256717-5f83-4ef2-9f08-b5bc66085282",
+              "name": "Unauthorized — invalid merchant credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registerTokenRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <accountNumber>(string)</accountNumber>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0498f0fd-cf04-4c10-890c-8e55a6a5be88",
+          "name": "Update Card Validation Number",
+          "request": {
+            "name": "Update Card Validation Number",
+            "description": {
+              "content": "Update the CVV/CVV2 validation number associated with a stored token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "updateCardValidationNumRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <token>(string)</token>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a0009368-7ec6-4bc1-8a9d-cddfd4aa8f8a",
+              "name": "Card validation update response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "updateCardValidationNumRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <token>(string)</token>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "889b2927-9f02-4d27-a4ab-ce58c7cf0bcd",
+              "name": "Bad request — malformed XML or invalid transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "updateCardValidationNumRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <token>(string)</token>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "9d41feb5-3b72-46a8-8eb5-c10e23474d09",
+              "name": "Unauthorized — invalid merchant credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "updateCardValidationNumRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <token>(string)</token>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "06b0804b-4dfd-4892-af68-42e7a5ef5ab4",
+      "name": "Recurring",
+      "description": {
+        "content": "Recurring and subscription billing",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3274b00f-56c3-4730-ab02-a9b01326d4de",
+          "name": "Create Recurring Transaction",
+          "request": {
+            "name": "Create Recurring Transaction",
+            "description": {
+              "content": "Process a recurring billing transaction against a stored card token. Used for subscription billing, installment payments, and automatic renewals.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "recurringTransaction"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <token>(string)</token>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "17f00725-dd74-4572-ba03-7f32d7c0c846",
+              "name": "Recurring transaction response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recurringTransaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <token>(string)</token>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <response>(string)</response>\n  <message>(string)</message>\n  <authCode>(string)</authCode>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "e87c14e8-3a7a-45ce-9fd1-e85e2032b852",
+              "name": "Bad request — malformed XML or invalid transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recurringTransaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <token>(string)</token>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "c1f7b2d8-2c2c-4278-93cb-e4ecffd42757",
+              "name": "Unauthorized — invalid merchant credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "recurringTransaction"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <token>(string)</token>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "e95b6f5b-771b-4478-a721-fa7fac77dc08",
+      "name": "eCheck",
+      "description": {
+        "content": "ACH and electronic check payment processing",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4deefff9-f958-4365-97b1-8fac830fd4fa",
+          "name": "Create eCheck Sale",
+          "request": {
+            "name": "Create eCheck Sale",
+            "description": {
+              "content": "Process an ACH/eCheck payment using bank account and routing number. Initiates an electronic check transaction for one-time or recurring bank payments.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "echeckSale"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <echeck>\n    <accType>(string)</accType>\n    <accNum>(string)</accNum>\n    <routingNum>(string)</routingNum>\n  </echeck>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ed43249d-5662-4efd-b092-c9f8cc9be659",
+              "name": "eCheck sale response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "echeckSale"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <echeck>\n    <accType>(string)</accType>\n    <accNum>(string)</accNum>\n    <routingNum>(string)</routingNum>\n  </echeck>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <orderId>(string)</orderId>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "9bfd6d4b-96ed-4d14-9018-57b2c63a45e5",
+              "name": "Bad request — malformed XML or invalid transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "echeckSale"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <echeck>\n    <accType>(string)</accType>\n    <accNum>(string)</accNum>\n    <routingNum>(string)</routingNum>\n  </echeck>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "0fc46862-a833-4573-82f0-7188a9b77a98",
+              "name": "Unauthorized — invalid merchant credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "echeckSale"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n  <echeck>\n    <accType>(string)</accType>\n    <accNum>(string)</accNum>\n    <routingNum>(string)</routingNum>\n  </echeck>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "9a3c65fc-6c5d-4962-99ef-50bbea732f82",
+          "name": "Create eCheck Credit",
+          "request": {
+            "name": "Create eCheck Credit",
+            "description": {
+              "content": "Issue a refund for a previously processed eCheck/ACH transaction.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "echeckCredit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <amount>(integer)</amount>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d886fe4a-56b8-481f-a0a9-d53e0febb633",
+              "name": "eCheck credit response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "echeckCredit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <amount>(integer)</amount>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "48cc010b-97d7-4590-8acc-faf9c72e3348",
+              "name": "Bad request — malformed XML or invalid transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "echeckCredit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <amount>(integer)</amount>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "612d62d5-ead8-4d98-9dfb-9351ed2dea00",
+              "name": "Unauthorized — invalid merchant credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "echeckCredit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <amount>(integer)</amount>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://payments.vantivprelive.com/vap/communicator/online",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "19689fa3-de94-4d5c-841b-583b3430a976",
+    "name": "Vantiv CNP API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vantiv Card Not Present (CNP) API (formerly the Litle eCommerce API) enables online and mobile payment processing. The API supports card authorizations, sales, captures, credits, voids, tokenization via eProtect/Vault, recurring billing, and chargeback management. Communication occurs via HTTPS POST with XML payloads. Vantiv merged with Worldpay in 2018 and the service is now offered as Worldpay from FIS.\n\nContact Support:\n Name: Worldpay Developer Hub",
+      "type": "text/plain"
+    }
+  }
+}

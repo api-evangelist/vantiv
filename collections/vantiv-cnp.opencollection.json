@@ -1,0 +1,191 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantiv CNP API",
+    "version": "12.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authorizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Authorization",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://payments.vantivprelive.com/vap/communicator/online/authorization"
+          },
+          "docs": "Authorize a card transaction to verify funds availability and place a hold on the cardholder's credit line. Returns an authorization code that must be captured to complete the transaction."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sales",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Sale",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://payments.vantivprelive.com/vap/communicator/online/sale"
+          },
+          "docs": "Process an authorization and capture in a single step. Use for transactions where you want to immediately settle funds without a separate capture step."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Captures",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Capture",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://payments.vantivprelive.com/vap/communicator/online/capture"
+          },
+          "docs": "Capture a previously authorized transaction to initiate settlement. Must reference a valid authorization transaction ID. Can capture partial amounts."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Credits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Credit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://payments.vantivprelive.com/vap/communicator/online/credit"
+          },
+          "docs": "Issue a refund to a cardholder. Can be a full or partial refund of a previously captured transaction, or an unlinked credit to any card."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Voids",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Void",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://payments.vantivprelive.com/vap/communicator/online/void"
+          },
+          "docs": "Cancel a pending transaction before it is settled. Can void authorizations, captures, sales, and credits that have not yet been settled."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tokenization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://payments.vantivprelive.com/vap/communicator/online/registerTokenRequest"
+          },
+          "docs": "Tokenize a payment card number into a secure token via the Vantiv Vault. The token can be used for subsequent transactions without storing raw card data, reducing PCI scope."
+        },
+        {
+          "info": {
+            "name": "Update Card Validation Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://payments.vantivprelive.com/vap/communicator/online/updateCardValidationNumRequest"
+          },
+          "docs": "Update the CVV/CVV2 validation number associated with a stored token."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Recurring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Recurring Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://payments.vantivprelive.com/vap/communicator/online/recurringTransaction"
+          },
+          "docs": "Process a recurring billing transaction against a stored card token. Used for subscription billing, installment payments, and automatic renewals."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "eCheck",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create eCheck Sale",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://payments.vantivprelive.com/vap/communicator/online/echeckSale"
+          },
+          "docs": "Process an ACH/eCheck payment using bank account and routing number. Initiates an electronic check transaction for one-time or recurring bank payments."
+        },
+        {
+          "info": {
+            "name": "Create eCheck Credit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://payments.vantivprelive.com/vap/communicator/online/echeckCredit"
+          },
+          "docs": "Issue a refund for a previously processed eCheck/ACH transaction."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

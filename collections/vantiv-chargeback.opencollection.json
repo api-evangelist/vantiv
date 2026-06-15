@@ -1,0 +1,174 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantiv Chargeback API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Chargebacks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Chargebacks",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.vantivprelive.com/services/chargebacks/chargebacks",
+            "params": [
+              {
+                "name": "date",
+                "value": "",
+                "type": "query",
+                "description": "Filter chargebacks by activity date (YYYY-MM-DD)"
+              },
+              {
+                "name": "financialImpact",
+                "value": "",
+                "type": "query",
+                "description": "Filter to only return chargebacks with financial impact"
+              },
+              {
+                "name": "responded",
+                "value": "",
+                "type": "query",
+                "description": "Filter by whether the chargeback has been responded to"
+              }
+            ]
+          },
+          "docs": "Retrieve a list of chargebacks with optional date range and status filters."
+        },
+        {
+          "info": {
+            "name": "Get Chargeback",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.vantivprelive.com/services/chargebacks/chargebacks/:caseId",
+            "params": [
+              {
+                "name": "caseId",
+                "value": "",
+                "type": "path",
+                "description": "Unique chargeback case identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific chargeback case."
+        },
+        {
+          "info": {
+            "name": "Respond To Chargeback",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://services.vantivprelive.com/services/chargebacks/chargebacks/:caseId/response",
+            "params": [
+              {
+                "name": "caseId",
+                "value": "",
+                "type": "path",
+                "description": "Unique chargeback case identifier"
+              }
+            ]
+          },
+          "docs": "Submit a merchant response to a chargeback dispute. The response may include accepting the chargeback or providing a rebuttal."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Chargeback Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.vantivprelive.com/services/chargebacks/chargebacks/:caseId/documents",
+            "params": [
+              {
+                "name": "caseId",
+                "value": "",
+                "type": "path",
+                "description": "Unique chargeback case identifier"
+              }
+            ]
+          },
+          "docs": "List all evidence documents uploaded for a chargeback case."
+        },
+        {
+          "info": {
+            "name": "Upload Chargeback Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://services.vantivprelive.com/services/chargebacks/chargebacks/:caseId/documents",
+            "params": [
+              {
+                "name": "caseId",
+                "value": "",
+                "type": "path",
+                "description": "Unique chargeback case identifier"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload an evidence document to support a chargeback dispute response."
+        },
+        {
+          "info": {
+            "name": "Delete Chargeback Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://services.vantivprelive.com/services/chargebacks/chargebacks/:caseId/documents/:documentId",
+            "params": [
+              {
+                "name": "caseId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document identifier"
+              }
+            ]
+          },
+          "docs": "Remove a previously uploaded evidence document from a chargeback case."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
