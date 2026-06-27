@@ -82,31 +82,31 @@ common:
     type: Portal
   - name: eCommerce SDKs
     url: https://developer.vantiv.com/community/ecommerce/pages/sdks
-    type: SDK
+    type: SDKs
   - name: Sandbox Documentation
     url: https://developer.vantiv.com/docs/DOC-1347
     type: Sandbox
   - name: GitHub Organization
     url: https://github.com/Vantiv
-    type: SDK
+    type: SDKs
   - name: Java SDK
     url: https://github.com/Vantiv/cnp-sdk-for-java
-    type: SDK
+    type: SDKs
   - name: Python SDK
     url: https://github.com/Vantiv/vantiv-sdk-for-python
-    type: SDK
+    type: SDKs
   - name: PHP SDK
     url: https://github.com/Vantiv/cnp-sdk-for-php
-    type: SDK
+    type: SDKs
   - name: .NET SDK
     url: https://github.com/Vantiv/cnp-sdk-for-dotnet
-    type: SDK
+    type: SDKs
   - name: Ruby SDK
     url: https://github.com/Vantiv/cnp-sdk-for-ruby
-    type: SDK
+    type: SDKs
   - name: Chargeback SDK Java
     url: https://github.com/Vantiv/cnp-chargeback-sdk-java
-    type: SDK
+    type: SDKs
   - name: Worldpay Developer Hub
     url: https://developer.worldpay.com
     type: Documentation
