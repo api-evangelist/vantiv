@@ -1,0 +1,13 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/vantiv-chargeback-openapi.yml, openapi/vantiv-cnp-openapi.yml
+summary:
+  types:
+  - http
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/vantiv-chargeback-openapi.yml
+  - openapi/vantiv-cnp-openapi.yml
