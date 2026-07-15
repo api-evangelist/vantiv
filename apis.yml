@@ -75,6 +75,8 @@ apis:
       The Vantiv Chargeback API provides programmatic access to chargeback and dispute management, allowing merchants to
       retrieve chargeback details, upload evidence, and respond to disputes.
 common:
+  - type: AgenticAccess
+    url: agentic-access/vantiv-agentic-access.yml
   - type: DomainSecurity
     url: security/vantiv-domain-security.yml
   - type: Authentication
