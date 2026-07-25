@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  title: Vantiv Chargeback Authorizations Sales API
+  description: The Vantiv Chargeback API provides programmatic access to chargeback and dispute management. Merchants can retrieve chargeback details, upload evidence documents, respond to disputes, and manage the entire chargeback lifecycle. This API is used to defend against fraudulent disputes and retrieve chargeback settlement information.
+  version: '2.0'
+  contact:
+    name: Worldpay Developer Hub
+    url: https://developer.worldpay.com
+  license:
+    name: Proprietary
+    url: https://developer.vantiv.com/community/ecommerce
+servers:
+- url: https://services.vantivprelive.com/services/chargebacks
+  description: Vantiv Pre-Live (Staging) Environment
+- url: https://services.vantivcnp.com/services/chargebacks
+  description: Vantiv Production Environment
+security:
+- basicAuth: []
+tags:
+- name: Sales
+  description: Combined authorization and capture transactions
+paths:
+  /sale:
+    post:
+      operationId: createSale
+      summary: Create Sale
+      description: Process an authorization and capture in a single step. Use for transactions where you want to immediately settle funds without a separate capture step.
+      tags:
+      - Sales
+      requestBody:
+        required: true
+        content:
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/SaleRequest'
+      responses:
+        '200':
+          description: Sale response
+          content:
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/SaleResponse'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — invalid merchant credentials
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — malformed XML or invalid transaction data
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    SaleRequest:
+      type: object
+      required:
+      - merchantId
+      - id
+      - orderId
+      - amount
+      - orderSource
+      - card
+      properties:
+        merchantId:
+          type: string
+        id:
+          type: string
+        orderId:
+          type: string
+        amount:
+          type: integer
+          description: Amount in cents
+        orderSource:
+          type: string
+          enum:
+          - ecommerce
+          - moto
+          - recurring
+        card:
+          $ref: '#/components/schemas/CardType'
+        billToAddress:
+          $ref: '#/components/schemas/AddressType'
+    AddressType:
+      type: object
+      description: Billing address for AVS verification
+      properties:
+        name:
+          type: string
+          description: Cardholder name
+        addressLine1:
+          type: string
+          description: Street address
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State/province code
+        zip:
+          type: string
+          description: Postal code
+        country:
+          type: string
+          description: Country code (ISO 3166-1 alpha-2)
+    ErrorResponse:
+      type: object
+      properties:
+        response:
+          type: string
+          description: Error response code
+        message:
+          type: string
+          description: Error message
+    CardType:
+      type: object
+      description: Payment card details
+      properties:
+        type:
+          type: string
+          enum:
+          - VI
+          - MC
+          - AX
+          - DI
+          - JC
+          description: Card type (Visa, MasterCard, Amex, Discover, JCB)
+        number:
+          type: string
+          description: Card number (PAN) or token
+        expDate:
+          type: string
+          pattern: ^\d{4}$
+          description: Expiration date in MMYY format
+        cardValidationNum:
+          type: string
+          description: CVV/CVV2 security code
+    SaleResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        cnpTxnId:
+          type: integer
+          format: int64
+        orderId:
+          type: string
+        response:
+          type: string
+        message:
+          type: string
+        authCode:
+          type: string
+        avsResult:
+          type: string
+        cardValidationResult:
+          type: string
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
