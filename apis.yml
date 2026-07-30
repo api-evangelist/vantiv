@@ -9,7 +9,20 @@ tags:
   - FinTech
   - Fortune 1000
 kind: company
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/vantiv.png
 access: 3rd-Party
 created: '2026-05-03'
 modified: '2026-05-19'
@@ -23,57 +36,146 @@ maintainers:
     email: kin@apievangelist.com
 specificationVersion: '0.19'
 apis:
-  - aid: vantiv:cnp-api
-    name: Vantiv CNP API
-    tags:
-      - Payments
-      - Payment Processing
-      - eCommerce
-      - Finance
-      - Card-Not-Present
-    humanURL: https://developer.vantiv.com/community/ecommerce
-    baseURL: https://payments.vantivprelive.com/vap/communicator/online
-    properties:
-      - url: https://developer.vantiv.com/community/ecommerce/pages/sdks
-        type: Documentation
-      - url: https://raw.githubusercontent.com/api-evangelist/vantiv/refs/heads/main/openapi/vantiv-cnp-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Vantiv Card Not Present (CNP) API, formerly known as the Litle eCommerce API, enables online and mobile
-      payment processing. Supports authorizations, sales, captures, credits, voids, tokenization, chargebacks, and
-      recurring billing through XML-based HTTPS POST requests.
-  - aid: vantiv:express-api
-    name: Vantiv Express API
-    tags:
-      - Payments
-      - Payment Processing
-      - Point Of Sale
-      - Finance
-    humanURL: https://developer.vantiv.com/community/point-of-sale/pages/documentation
-    baseURL: https://api.vantivintegrationtest.com/express/v1
-    properties:
-      - url: https://developer.vantiv.com/community/point-of-sale/pages/documentation
-        type: Documentation
-      - url: https://raw.githubusercontent.com/api-evangelist/vantiv/refs/heads/main/openapi/vantiv-express-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Vantiv Integrated Payments Express API provides a REST/XML interface for point-of-sale and in-person payment
-      processing. Supports credit, debit, EBT, gift card, and check transactions with EMV chip support.
-  - aid: vantiv:chargeback-api
-    name: Vantiv Chargeback API
-    tags:
-      - Payments
-      - Chargebacks
-      - Finance
-      - Dispute Management
-    humanURL: https://developer.vantiv.com/community/ecommerce
-    baseURL: https://services.vantivprelive.com/services/chargebacks
-    properties:
-      - url: https://raw.githubusercontent.com/api-evangelist/vantiv/refs/heads/main/openapi/vantiv-chargeback-openapi.yml
-        type: OpenAPI
-    description: >-
-      The Vantiv Chargeback API provides programmatic access to chargeback and dispute management, allowing merchants to
-      retrieve chargeback details, upload evidence, and respond to disputes.
+- aid: vantiv:vantiv-authorizations-api
+  name: Vantiv Authorizations API
+  description: Card authorization and fund verification
+  humanURL: https://developer.vantiv.com/community/ecommerce
+  baseURL: https://payments.vantivprelive.com/vap/communicator/online
+  tags:
+  - Authorizations
+  properties:
+  - type: OpenAPI
+    url: openapi/vantiv-authorizations-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vantiv.com/community/ecommerce/pages/sdks
+  - type: Documentation
+    url: https://developer.vantiv.com/community/point-of-sale/pages/documentation
+- aid: vantiv:vantiv-captures-api
+  name: Vantiv Captures API
+  description: Capture previously authorized transactions for settlement
+  humanURL: https://developer.vantiv.com/community/ecommerce
+  baseURL: https://payments.vantivprelive.com/vap/communicator/online
+  tags:
+  - Captures
+  properties:
+  - type: OpenAPI
+    url: openapi/vantiv-captures-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vantiv.com/community/ecommerce/pages/sdks
+  - type: Documentation
+    url: https://developer.vantiv.com/community/point-of-sale/pages/documentation
+- aid: vantiv:vantiv-chargebacks-api
+  name: Vantiv Chargebacks API
+  description: Chargeback dispute retrieval and response management
+  humanURL: https://developer.vantiv.com/community/ecommerce
+  baseURL: https://payments.vantivprelive.com/vap/communicator/online
+  tags:
+  - Chargebacks
+  properties:
+  - type: OpenAPI
+    url: openapi/vantiv-chargebacks-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vantiv.com/community/ecommerce/pages/sdks
+  - type: Documentation
+    url: https://developer.vantiv.com/community/point-of-sale/pages/documentation
+- aid: vantiv:vantiv-credits-api
+  name: Vantiv Credits API
+  description: Refunds and credits to cardholder accounts
+  humanURL: https://developer.vantiv.com/community/ecommerce
+  baseURL: https://payments.vantivprelive.com/vap/communicator/online
+  tags:
+  - Credits
+  properties:
+  - type: OpenAPI
+    url: openapi/vantiv-credits-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vantiv.com/community/ecommerce/pages/sdks
+  - type: Documentation
+    url: https://developer.vantiv.com/community/point-of-sale/pages/documentation
+- aid: vantiv:vantiv-documents-api
+  name: Vantiv Documents API
+  description: Evidence document upload and management for chargebacks
+  humanURL: https://developer.vantiv.com/community/ecommerce
+  baseURL: https://payments.vantivprelive.com/vap/communicator/online
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/vantiv-documents-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vantiv.com/community/ecommerce/pages/sdks
+  - type: Documentation
+    url: https://developer.vantiv.com/community/point-of-sale/pages/documentation
+- aid: vantiv:vantiv-echeck-api
+  name: Vantiv eCheck API
+  description: ACH and electronic check payment processing
+  humanURL: https://developer.vantiv.com/community/ecommerce
+  baseURL: https://payments.vantivprelive.com/vap/communicator/online
+  tags:
+  - eCheck
+  properties:
+  - type: OpenAPI
+    url: openapi/vantiv-echeck-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vantiv.com/community/ecommerce/pages/sdks
+  - type: Documentation
+    url: https://developer.vantiv.com/community/point-of-sale/pages/documentation
+- aid: vantiv:vantiv-recurring-api
+  name: Vantiv Recurring API
+  description: Recurring and subscription billing
+  humanURL: https://developer.vantiv.com/community/ecommerce
+  baseURL: https://payments.vantivprelive.com/vap/communicator/online
+  tags:
+  - Recurring
+  properties:
+  - type: OpenAPI
+    url: openapi/vantiv-recurring-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vantiv.com/community/ecommerce/pages/sdks
+  - type: Documentation
+    url: https://developer.vantiv.com/community/point-of-sale/pages/documentation
+- aid: vantiv:vantiv-sales-api
+  name: Vantiv Sales API
+  description: Combined authorization and capture transactions
+  humanURL: https://developer.vantiv.com/community/ecommerce
+  baseURL: https://payments.vantivprelive.com/vap/communicator/online
+  tags:
+  - Sales
+  properties:
+  - type: OpenAPI
+    url: openapi/vantiv-sales-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vantiv.com/community/ecommerce/pages/sdks
+  - type: Documentation
+    url: https://developer.vantiv.com/community/point-of-sale/pages/documentation
+- aid: vantiv:vantiv-tokenization-api
+  name: Vantiv Tokenization API
+  description: Card data tokenization via Vantiv Vault
+  humanURL: https://developer.vantiv.com/community/ecommerce
+  baseURL: https://payments.vantivprelive.com/vap/communicator/online
+  tags:
+  - Tokenization
+  properties:
+  - type: OpenAPI
+    url: openapi/vantiv-tokenization-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vantiv.com/community/ecommerce/pages/sdks
+  - type: Documentation
+    url: https://developer.vantiv.com/community/point-of-sale/pages/documentation
+- aid: vantiv:vantiv-voids-api
+  name: Vantiv Voids API
+  description: Cancel pending unsettled transactions
+  humanURL: https://developer.vantiv.com/community/ecommerce
+  baseURL: https://payments.vantivprelive.com/vap/communicator/online
+  tags:
+  - Voids
+  properties:
+  - type: OpenAPI
+    url: openapi/vantiv-voids-api-openapi.yml
+  - type: Documentation
+    url: https://developer.vantiv.com/community/ecommerce/pages/sdks
+  - type: Documentation
+    url: https://developer.vantiv.com/community/point-of-sale/pages/documentation
 common:
   - type: AgenticAccess
     url: agentic-access/vantiv-agentic-access.yml
