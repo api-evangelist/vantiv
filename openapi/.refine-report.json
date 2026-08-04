@@ -1,0 +1,32 @@
+{
+  "provider": "vantiv",
+  "sources": [
+    "vantiv-authorizations-api-openapi.yml",
+    "vantiv-captures-api-openapi.yml",
+    "vantiv-chargebacks-api-openapi.yml",
+    "vantiv-credits-api-openapi.yml",
+    "vantiv-documents-api-openapi.yml",
+    "vantiv-echeck-api-openapi.yml",
+    "vantiv-recurring-api-openapi.yml",
+    "vantiv-sales-api-openapi.yml",
+    "vantiv-tokenization-api-openapi.yml",
+    "vantiv-voids-api-openapi.yml"
+  ],
+  "outputs": [
+    "vantiv-authorizations-api-openapi.yml",
+    "vantiv-captures-api-openapi.yml",
+    "vantiv-chargebacks-api-openapi.yml",
+    "vantiv-credits-api-openapi.yml",
+    "vantiv-documents-api-openapi.yml",
+    "vantiv-echeck-api-openapi.yml",
+    "vantiv-recurring-api-openapi.yml",
+    "vantiv-sales-api-openapi.yml",
+    "vantiv-tokenization-api-openapi.yml",
+    "vantiv-voids-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
