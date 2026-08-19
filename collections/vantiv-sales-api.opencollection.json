@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantiv Chargeback Authorizations Sales API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Sales",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Sale",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://services.vantivprelive.com/services/chargebacks/sale"
+          },
+          "docs": "Process an authorization and capture in a single step. Use for transactions where you want to immediately settle funds without a separate capture step."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

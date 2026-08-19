@@ -1,0 +1,246 @@
+{
+  "item": [
+    {
+      "id": "ef6ddf5e-9bbf-4ef5-9d00-b12abc84dcf4",
+      "name": "Credits",
+      "description": {
+        "content": "Refunds and credits to cardholder accounts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4aa6945b-a818-4638-8bf8-31e113f508af",
+          "name": "Create Credit",
+          "request": {
+            "name": "Create Credit",
+            "description": {
+              "content": "Issue a refund to a cardholder. Can be a full or partial refund of a previously captured transaction, or an unlinked credit to any card.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "credit"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1be47f10-245c-4bb7-af34-7ab3f309ba24",
+              "name": "Credit response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "5941ecb7-3f92-4b3f-a794-40567fe66821",
+              "name": "Bad request — malformed XML or invalid transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "e905a2c9-009d-4b48-af91-778f88eeac2b",
+              "name": "Unauthorized — invalid merchant credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "credit"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <orderId>(string)</orderId>\n  <amount>(integer)</amount>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://services.vantivprelive.com/services/chargebacks",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b0f27ff3-6b0d-4f9e-b82b-f4a8e10de84f",
+    "name": "Vantiv Chargeback Authorizations Credits API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vantiv Chargeback API provides programmatic access to chargeback and dispute management. Merchants can retrieve chargeback details, upload evidence documents, respond to disputes, and manage the entire chargeback lifecycle. This API is used to defend against fraudulent disputes and retrieve chargeback settlement information.\n\nContact Support:\n Name: Worldpay Developer Hub",
+      "type": "text/plain"
+    }
+  }
+}

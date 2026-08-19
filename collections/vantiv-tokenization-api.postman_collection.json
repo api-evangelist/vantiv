@@ -1,0 +1,447 @@
+{
+  "item": [
+    {
+      "id": "3f9480f7-b6d3-4c4c-9485-58af88e28ecf",
+      "name": "Tokenization",
+      "description": {
+        "content": "Card data tokenization via Vantiv Vault",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b7112fae-ae7a-47b3-aacc-5c927c39d722",
+          "name": "Register Token",
+          "request": {
+            "name": "Register Token",
+            "description": {
+              "content": "Tokenize a payment card number into a secure token via the Vantiv Vault. The token can be used for subsequent transactions without storing raw card data, reducing PCI scope.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "registerTokenRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <accountNumber>(string)</accountNumber>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3614fc70-2ac6-4b84-a070-0a7ad5645a87",
+              "name": "Token registration response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registerTokenRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <accountNumber>(string)</accountNumber>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <cnpTxnId>(integer)</cnpTxnId>\n  <orderId>(string)</orderId>\n  <response>(string)</response>\n  <message>(string)</message>\n  <litleToken>(string)</litleToken>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "508fd878-1dab-4e31-862d-f06b511830ed",
+              "name": "Bad request — malformed XML or invalid transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registerTokenRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <accountNumber>(string)</accountNumber>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "495aa0cd-cb1a-4786-9001-3c1729975c15",
+              "name": "Unauthorized — invalid merchant credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "registerTokenRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <accountNumber>(string)</accountNumber>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "36d3e3e3-3909-444b-9b6c-99402bb39579",
+          "name": "Update Card Validation Number",
+          "request": {
+            "name": "Update Card Validation Number",
+            "description": {
+              "content": "Update the CVV/CVV2 validation number associated with a stored token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "updateCardValidationNumRequest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/xml"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <token>(string)</token>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "14bc3d21-54ad-4c82-a181-8eb3f3c85def",
+              "name": "Card validation update response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "updateCardValidationNumRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <token>(string)</token>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <id>(string)</id>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "84cf839e-14b6-4f5e-9e93-dc5ec1186af5",
+              "name": "Bad request — malformed XML or invalid transaction data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "updateCardValidationNumRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <token>(string)</token>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "772ed871-bcdd-49b3-89e3-aad5d52590a1",
+              "name": "Unauthorized — invalid merchant credentials",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "updateCardValidationNumRequest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <merchantId>(string)</merchantId>\n  <id>(string)</id>\n  <orderId>(string)</orderId>\n  <token>(string)</token>\n  <cardValidationNum>(string)</cardValidationNum>\n</element>",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<element>\n  <response>(string)</response>\n  <message>(string)</message>\n</element>",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://services.vantivprelive.com/services/chargebacks",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d2b22498-ebbb-431b-9a20-c26c28b976d1",
+    "name": "Vantiv Chargeback Authorizations Tokenization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Vantiv Chargeback API provides programmatic access to chargeback and dispute management. Merchants can retrieve chargeback details, upload evidence documents, respond to disputes, and manage the entire chargeback lifecycle. This API is used to defend against fraudulent disputes and retrieve chargeback settlement information.\n\nContact Support:\n Name: Worldpay Developer Hub",
+      "type": "text/plain"
+    }
+  }
+}

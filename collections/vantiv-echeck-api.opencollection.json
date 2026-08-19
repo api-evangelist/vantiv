@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantiv Chargeback Authorizations eCheck API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "eCheck",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create eCheck Sale",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://services.vantivprelive.com/services/chargebacks/echeckSale"
+          },
+          "docs": "Process an ACH/eCheck payment using bank account and routing number. Initiates an electronic check transaction for one-time or recurring bank payments."
+        },
+        {
+          "info": {
+            "name": "Create eCheck Credit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://services.vantivprelive.com/services/chargebacks/echeckCredit"
+          },
+          "docs": "Issue a refund for a previously processed eCheck/ACH transaction."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantiv Chargeback Authorizations Credits API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Credits",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Credit",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://services.vantivprelive.com/services/chargebacks/credit"
+          },
+          "docs": "Issue a refund to a cardholder. Can be a full or partial refund of a previously captured transaction, or an unlinked credit to any card."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

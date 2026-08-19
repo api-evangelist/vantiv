@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantiv Chargeback Authorizations Tokenization API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tokenization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Register Token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://services.vantivprelive.com/services/chargebacks/registerTokenRequest"
+          },
+          "docs": "Tokenize a payment card number into a secure token via the Vantiv Vault. The token can be used for subsequent transactions without storing raw card data, reducing PCI scope."
+        },
+        {
+          "info": {
+            "name": "Update Card Validation Number",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://services.vantivprelive.com/services/chargebacks/updateCardValidationNumRequest"
+          },
+          "docs": "Update the CVV/CVV2 validation number associated with a stored token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

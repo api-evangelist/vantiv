@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantiv Chargeback Authorizations Recurring API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Recurring",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create Recurring Transaction",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://services.vantivprelive.com/services/chargebacks/recurringTransaction"
+          },
+          "docs": "Process a recurring billing transaction against a stored card token. Used for subscription billing, installment payments, and automatic renewals."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,97 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Vantiv Chargeback Authorizations Documents API",
+    "version": "2.0"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Chargeback Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://services.vantivprelive.com/services/chargebacks/chargebacks/:caseId/documents",
+            "params": [
+              {
+                "name": "caseId",
+                "value": "",
+                "type": "path",
+                "description": "Unique chargeback case identifier"
+              }
+            ]
+          },
+          "docs": "List all evidence documents uploaded for a chargeback case."
+        },
+        {
+          "info": {
+            "name": "Upload Chargeback Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://services.vantivprelive.com/services/chargebacks/chargebacks/:caseId/documents",
+            "params": [
+              {
+                "name": "caseId",
+                "value": "",
+                "type": "path",
+                "description": "Unique chargeback case identifier"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload an evidence document to support a chargeback dispute response."
+        },
+        {
+          "info": {
+            "name": "Delete Chargeback Document",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://services.vantivprelive.com/services/chargebacks/chargebacks/:caseId/documents/:documentId",
+            "params": [
+              {
+                "name": "caseId",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "documentId",
+                "value": "",
+                "type": "path",
+                "description": "Document identifier"
+              }
+            ]
+          },
+          "docs": "Remove a previously uploaded evidence document from a chargeback case."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
