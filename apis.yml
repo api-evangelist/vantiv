@@ -4,6 +4,13 @@ name: Vantiv
 tags:
   - Payments
   - Payment Processing
+  - E-Commerce
+  - Finance
+  - Fintech
+  - Fortune 1000
+tags_raw:
+  - Payments
+  - Payment Processing
   - eCommerce
   - Finance
   - FinTech
@@ -56,6 +63,8 @@ apis:
   humanURL: https://developer.vantiv.com/community/ecommerce
   baseURL: https://payments.vantivprelive.com/vap/communicator/online
   tags:
+  - Capture
+  tags_raw:
   - Captures
   properties:
   - type: OpenAPI
