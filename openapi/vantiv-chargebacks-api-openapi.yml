@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Vantiv Chargeback Authorizations Chargebacks API
+  title: Vantiv Chargeback Chargebacks API
   description: The Vantiv Chargeback API provides programmatic access to chargeback and dispute management. Merchants can retrieve chargeback details, upload evidence documents, respond to disputes, and manage the entire chargeback lifecycle. This API is used to defend against fraudulent disputes and retrieve chargeback settlement information.
   version: '2.0'
   contact:
@@ -114,26 +114,28 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  responses:
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    NotFound:
-      description: Chargeback case not found
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ChargebackResponseRequest:
+      type: object
+      required:
+      - activity
+      properties:
+        activity:
+          type: string
+          enum:
+          - MERCHANT_ACCEPTS
+          - MERCHANT_CONTESTS
+          description: Merchant response type
+        note:
+          type: string
+          description: Optional response note or rebuttal
+    ChargebackUpdateResponse:
+      type: object
+      properties:
+        transactionId:
+          type: integer
+          format: int64
+          description: Response transaction ID
     ErrorResponse:
       type: object
       properties:
@@ -187,13 +189,11 @@ components:
         financialImpact:
           type: boolean
           description: Whether this chargeback has a financial impact
-    ChargebackUpdateResponse:
+    ChargebackResponse:
       type: object
       properties:
-        transactionId:
-          type: integer
-          format: int64
-          description: Response transaction ID
+        chargebackCase:
+          $ref: '#/components/schemas/Chargeback'
     ChargebackListResponse:
       type: object
       properties:
@@ -201,25 +201,25 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Chargeback'
-    ChargebackResponseRequest:
-      type: object
-      required:
-      - activity
-      properties:
-        activity:
-          type: string
-          enum:
-          - MERCHANT_ACCEPTS
-          - MERCHANT_CONTESTS
-          description: Merchant response type
-        note:
-          type: string
-          description: Optional response note or rebuttal
-    ChargebackResponse:
-      type: object
-      properties:
-        chargebackCase:
-          $ref: '#/components/schemas/Chargeback'
+  responses:
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Chargeback case not found
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http

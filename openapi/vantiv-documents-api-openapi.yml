@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Vantiv Chargeback Authorizations Documents API
+  title: Vantiv Chargeback Documents API
   description: The Vantiv Chargeback API provides programmatic access to chargeback and dispute management. Merchants can retrieve chargeback details, upload evidence documents, respond to disputes, and manage the entire chargeback lifecycle. This API is used to defend against fraudulent disputes and retrieve chargeback settlement information.
   version: '2.0'
   contact:
@@ -110,6 +110,39 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  schemas:
+    DocumentListResponse:
+      type: object
+      properties:
+        documentList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+    ErrorResponse:
+      type: object
+      properties:
+        response:
+          type: string
+        message:
+          type: string
+    DocumentUploadResponse:
+      type: object
+      properties:
+        documentId:
+          type: string
+          description: Assigned document identifier
+    Document:
+      type: object
+      properties:
+        documentId:
+          type: string
+          description: Document identifier
+        documentType:
+          type: string
+          description: Document MIME type
+        size:
+          type: integer
+          description: Document size in bytes
   responses:
     Unauthorized:
       description: Unauthorized
@@ -129,39 +162,6 @@ components:
         application/xml:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        response:
-          type: string
-        message:
-          type: string
-    DocumentListResponse:
-      type: object
-      properties:
-        documentList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Document'
-    DocumentUploadResponse:
-      type: object
-      properties:
-        documentId:
-          type: string
-          description: Assigned document identifier
-    Document:
-      type: object
-      properties:
-        documentId:
-          type: string
-          description: Document identifier
-        documentType:
-          type: string
-          description: Document MIME type
-        size:
-          type: integer
-          description: Document size in bytes
   securitySchemes:
     basicAuth:
       type: http

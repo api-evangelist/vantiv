@@ -1,32 +1,39 @@
 {
   "provider": "vantiv",
   "sources": [
-    "vantiv-authorizations-api-openapi.yml",
-    "vantiv-captures-api-openapi.yml",
-    "vantiv-chargebacks-api-openapi.yml",
-    "vantiv-credits-api-openapi.yml",
-    "vantiv-documents-api-openapi.yml",
-    "vantiv-echeck-api-openapi.yml",
-    "vantiv-recurring-api-openapi.yml",
-    "vantiv-sales-api-openapi.yml",
-    "vantiv-tokenization-api-openapi.yml",
-    "vantiv-voids-api-openapi.yml"
+    "_original/vantiv-chargeback-openapi.yml",
+    "_original/vantiv-cnp-openapi.yml"
   ],
   "outputs": [
+    "vantiv-chargebacks-api-openapi.yml",
+    "vantiv-documents-api-openapi.yml",
     "vantiv-authorizations-api-openapi.yml",
     "vantiv-captures-api-openapi.yml",
-    "vantiv-chargebacks-api-openapi.yml",
     "vantiv-credits-api-openapi.yml",
-    "vantiv-documents-api-openapi.yml",
-    "vantiv-echeck-api-openapi.yml",
     "vantiv-recurring-api-openapi.yml",
     "vantiv-sales-api-openapi.yml",
     "vantiv-tokenization-api-openapi.yml",
-    "vantiv-voids-api-openapi.yml"
+    "vantiv-voids-api-openapi.yml",
+    "vantiv-echeck-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "vantiv-chargeback-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "vantiv-cnp-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "vantiv-authorizations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vantiv-captures-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vantiv-chargebacks-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vantiv-credits-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vantiv-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vantiv-echeck-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vantiv-recurring-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vantiv-sales-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vantiv-tokenization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "vantiv-voids-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
