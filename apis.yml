@@ -61,6 +61,8 @@ apis:
   humanURL: https://developer.vantiv.com/community/ecommerce
   baseURL: https://payments.vantivprelive.com/vap/communicator/online
   tags:
+  - Authorization
+  tags_raw:
   - Authorizations
   properties:
   - type: OpenAPI
@@ -105,6 +107,8 @@ apis:
   humanURL: https://developer.vantiv.com/community/ecommerce
   baseURL: https://payments.vantivprelive.com/vap/communicator/online
   tags:
+  - Credit
+  tags_raw:
   - Credits
   properties:
   - type: OpenAPI
