@@ -1,7 +1,9 @@
 ---
 title: IDEMIA/WORLDPAY | Business Wire
 url: https://via.ritzau.dk/pressemeddelelse/13061997/idemiaworldpay?publisherId=90456
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Vantiv" press release artificial intelligence'
 position: 5
 source: serpapi-google

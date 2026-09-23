@@ -1,7 +1,9 @@
 ---
 title: Vantiv and Worldpay Complete Combination to Form ...
 url: https://www.prnewswire.com/news-releases/vantiv-and-worldpay-complete-combination-to-form-worldpay-inc-300583008.html
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Vantiv" press release artificial intelligence'
 position: 1
 source: serpapi-google

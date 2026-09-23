@@ -1,7 +1,9 @@
 ---
 title: Vantiv Embraces Apple Pay on Web, Lures Its Developers
 url: https://www.americanbanker.com/payments/news/vantiv-embraces-apple-pay-on-web-lures-its-developers
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Vantiv" press release artificial intelligence'
 position: 3
 source: serpapi-google

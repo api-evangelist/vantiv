@@ -115,34 +115,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    ChargebackResponseRequest:
-      type: object
-      required:
-      - activity
-      properties:
-        activity:
-          type: string
-          enum:
-          - MERCHANT_ACCEPTS
-          - MERCHANT_CONTESTS
-          description: Merchant response type
-        note:
-          type: string
-          description: Optional response note or rebuttal
-    ChargebackUpdateResponse:
-      type: object
-      properties:
-        transactionId:
-          type: integer
-          format: int64
-          description: Response transaction ID
-    ErrorResponse:
-      type: object
-      properties:
-        response:
-          type: string
-        message:
-          type: string
     Chargeback:
       type: object
       properties:
@@ -194,6 +166,34 @@ components:
       properties:
         chargebackCase:
           $ref: '#/components/schemas/Chargeback'
+    ErrorResponse:
+      type: object
+      properties:
+        response:
+          type: string
+        message:
+          type: string
+    ChargebackUpdateResponse:
+      type: object
+      properties:
+        transactionId:
+          type: integer
+          format: int64
+          description: Response transaction ID
+    ChargebackResponseRequest:
+      type: object
+      required:
+      - activity
+      properties:
+        activity:
+          type: string
+          enum:
+          - MERCHANT_ACCEPTS
+          - MERCHANT_CONTESTS
+          description: Merchant response type
+        note:
+          type: string
+          description: Optional response note or rebuttal
     ChargebackListResponse:
       type: object
       properties:

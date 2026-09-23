@@ -99,6 +99,28 @@ components:
         message:
           type: string
           description: Error message
+    AddressType:
+      type: object
+      description: Billing address for AVS verification
+      properties:
+        name:
+          type: string
+          description: Cardholder name
+        addressLine1:
+          type: string
+          description: Street address
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State/province code
+        zip:
+          type: string
+          description: Postal code
+        country:
+          type: string
+          description: Country code (ISO 3166-1 alpha-2)
     AuthorizationResponse:
       type: object
       properties:
@@ -167,28 +189,6 @@ components:
         cardValidationNum:
           type: string
           description: CVV/CVV2 security code
-    AddressType:
-      type: object
-      description: Billing address for AVS verification
-      properties:
-        name:
-          type: string
-          description: Cardholder name
-        addressLine1:
-          type: string
-          description: Street address
-        city:
-          type: string
-          description: City
-        state:
-          type: string
-          description: State/province code
-        zip:
-          type: string
-          description: Postal code
-        country:
-          type: string
-          description: Country code (ISO 3166-1 alpha-2)
   responses:
     Unauthorized:
       description: Unauthorized — invalid merchant credentials

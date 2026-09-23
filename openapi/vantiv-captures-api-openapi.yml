@@ -49,29 +49,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    CaptureResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        cnpTxnId:
-          type: integer
-          format: int64
-        response:
-          type: string
-        message:
-          type: string
-        postDate:
-          type: string
-    ErrorResponse:
-      type: object
-      properties:
-        response:
-          type: string
-          description: Error response code
-        message:
-          type: string
-          description: Error message
     CaptureRequest:
       type: object
       required:
@@ -91,6 +68,29 @@ components:
         amount:
           type: integer
           description: Amount to capture in cents (can be less than authorization)
+    ErrorResponse:
+      type: object
+      properties:
+        response:
+          type: string
+          description: Error response code
+        message:
+          type: string
+          description: Error message
+    CaptureResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        cnpTxnId:
+          type: integer
+          format: int64
+        response:
+          type: string
+        message:
+          type: string
+        postDate:
+          type: string
   responses:
     Unauthorized:
       description: Unauthorized — invalid merchant credentials

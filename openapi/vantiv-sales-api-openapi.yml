@@ -87,29 +87,6 @@ components:
         message:
           type: string
           description: Error message
-    CardType:
-      type: object
-      description: Payment card details
-      properties:
-        type:
-          type: string
-          enum:
-          - VI
-          - MC
-          - AX
-          - DI
-          - JC
-          description: Card type (Visa, MasterCard, Amex, Discover, JCB)
-        number:
-          type: string
-          description: Card number (PAN) or token
-        expDate:
-          type: string
-          pattern: ^\d{4}$
-          description: Expiration date in MMYY format
-        cardValidationNum:
-          type: string
-          description: CVV/CVV2 security code
     SaleResponse:
       type: object
       properties:
@@ -152,6 +129,29 @@ components:
         country:
           type: string
           description: Country code (ISO 3166-1 alpha-2)
+    CardType:
+      type: object
+      description: Payment card details
+      properties:
+        type:
+          type: string
+          enum:
+          - VI
+          - MC
+          - AX
+          - DI
+          - JC
+          description: Card type (Visa, MasterCard, Amex, Discover, JCB)
+        number:
+          type: string
+          description: Card number (PAN) or token
+        expDate:
+          type: string
+          pattern: ^\d{4}$
+          description: Expiration date in MMYY format
+        cardValidationNum:
+          type: string
+          description: CVV/CVV2 security code
   responses:
     Unauthorized:
       description: Unauthorized — invalid merchant credentials

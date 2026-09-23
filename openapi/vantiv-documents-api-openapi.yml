@@ -110,39 +110,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  schemas:
-    DocumentListResponse:
-      type: object
-      properties:
-        documentList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Document'
-    ErrorResponse:
-      type: object
-      properties:
-        response:
-          type: string
-        message:
-          type: string
-    DocumentUploadResponse:
-      type: object
-      properties:
-        documentId:
-          type: string
-          description: Assigned document identifier
-    Document:
-      type: object
-      properties:
-        documentId:
-          type: string
-          description: Document identifier
-        documentType:
-          type: string
-          description: Document MIME type
-        size:
-          type: integer
-          description: Document size in bytes
   responses:
     Unauthorized:
       description: Unauthorized
@@ -162,6 +129,39 @@ components:
         application/xml:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+  schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        response:
+          type: string
+        message:
+          type: string
+    DocumentUploadResponse:
+      type: object
+      properties:
+        documentId:
+          type: string
+          description: Assigned document identifier
+    DocumentListResponse:
+      type: object
+      properties:
+        documentList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+    Document:
+      type: object
+      properties:
+        documentId:
+          type: string
+          description: Document identifier
+        documentType:
+          type: string
+          description: Document MIME type
+        size:
+          type: integer
+          description: Document size in bytes
   securitySchemes:
     basicAuth:
       type: http

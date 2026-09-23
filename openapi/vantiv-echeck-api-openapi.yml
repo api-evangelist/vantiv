@@ -72,7 +72,37 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — invalid merchant credentials
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — malformed XML or invalid transaction data
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    EcheckCreditRequest:
+      type: object
+      required:
+      - merchantId
+      - id
+      - cnpTxnId
+      - amount
+      properties:
+        merchantId:
+          type: string
+        id:
+          type: string
+        cnpTxnId:
+          type: integer
+          format: int64
+        amount:
+          type: integer
     ErrorResponse:
       type: object
       properties:
@@ -142,36 +172,6 @@ components:
           type: string
         message:
           type: string
-    EcheckCreditRequest:
-      type: object
-      required:
-      - merchantId
-      - id
-      - cnpTxnId
-      - amount
-      properties:
-        merchantId:
-          type: string
-        id:
-          type: string
-        cnpTxnId:
-          type: integer
-          format: int64
-        amount:
-          type: integer
-  responses:
-    Unauthorized:
-      description: Unauthorized — invalid merchant credentials
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request — malformed XML or invalid transaction data
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http
