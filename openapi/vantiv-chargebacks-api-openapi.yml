@@ -115,6 +115,25 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ChargebackListResponse:
+      type: object
+      properties:
+        chargebackCase:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chargeback'
+    ChargebackUpdateResponse:
+      type: object
+      properties:
+        transactionId:
+          type: integer
+          format: int64
+          description: Response transaction ID
+    ChargebackResponse:
+      type: object
+      properties:
+        chargebackCase:
+          $ref: '#/components/schemas/Chargeback'
     Chargeback:
       type: object
       properties:
@@ -161,11 +180,6 @@ components:
         financialImpact:
           type: boolean
           description: Whether this chargeback has a financial impact
-    ChargebackResponse:
-      type: object
-      properties:
-        chargebackCase:
-          $ref: '#/components/schemas/Chargeback'
     ErrorResponse:
       type: object
       properties:
@@ -173,13 +187,6 @@ components:
           type: string
         message:
           type: string
-    ChargebackUpdateResponse:
-      type: object
-      properties:
-        transactionId:
-          type: integer
-          format: int64
-          description: Response transaction ID
     ChargebackResponseRequest:
       type: object
       required:
@@ -194,20 +201,7 @@ components:
         note:
           type: string
           description: Optional response note or rebuttal
-    ChargebackListResponse:
-      type: object
-      properties:
-        chargebackCase:
-          type: array
-          items:
-            $ref: '#/components/schemas/Chargeback'
   responses:
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Chargeback case not found
       content:
@@ -216,6 +210,12 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     BadRequest:
       description: Bad request
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized
       content:
         application/xml:
           schema:

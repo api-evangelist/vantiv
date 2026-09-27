@@ -111,12 +111,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     NotFound:
       description: Chargeback case not found
       content:
@@ -129,7 +123,20 @@ components:
         application/xml:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    DocumentListResponse:
+      type: object
+      properties:
+        documentList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
     ErrorResponse:
       type: object
       properties:
@@ -143,13 +150,6 @@ components:
         documentId:
           type: string
           description: Assigned document identifier
-    DocumentListResponse:
-      type: object
-      properties:
-        documentList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Document'
     Document:
       type: object
       properties:
