@@ -48,7 +48,29 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
+  responses:
+    Unauthorized:
+      description: Unauthorized — invalid merchant credentials
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request — malformed XML or invalid transaction data
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        response:
+          type: string
+          description: Error response code
+        message:
+          type: string
+          description: Error message
     CaptureResponse:
       type: object
       properties:
@@ -63,15 +85,6 @@ components:
           type: string
         postDate:
           type: string
-    ErrorResponse:
-      type: object
-      properties:
-        response:
-          type: string
-          description: Error response code
-        message:
-          type: string
-          description: Error message
     CaptureRequest:
       type: object
       required:
@@ -91,19 +104,6 @@ components:
         amount:
           type: integer
           description: Amount to capture in cents (can be less than authorization)
-  responses:
-    BadRequest:
-      description: Bad request — malformed XML or invalid transaction data
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized — invalid merchant credentials
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http

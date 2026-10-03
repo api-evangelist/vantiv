@@ -48,20 +48,22 @@ paths:
         '401':
           $ref: '#/components/responses/Unauthorized'
 components:
-  responses:
-    BadRequest:
-      description: Bad request — malformed XML or invalid transaction data
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized — invalid merchant credentials
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    VoidRequest:
+      type: object
+      required:
+      - merchantId
+      - id
+      - cnpTxnId
+      properties:
+        merchantId:
+          type: string
+        id:
+          type: string
+        cnpTxnId:
+          type: integer
+          format: int64
+          description: Transaction ID to void
     VoidResponse:
       type: object
       properties:
@@ -83,21 +85,19 @@ components:
         message:
           type: string
           description: Error message
-    VoidRequest:
-      type: object
-      required:
-      - merchantId
-      - id
-      - cnpTxnId
-      properties:
-        merchantId:
-          type: string
-        id:
-          type: string
-        cnpTxnId:
-          type: integer
-          format: int64
-          description: Transaction ID to void
+  responses:
+    BadRequest:
+      description: Bad request — malformed XML or invalid transaction data
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized — invalid merchant credentials
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
     basicAuth:
       type: http

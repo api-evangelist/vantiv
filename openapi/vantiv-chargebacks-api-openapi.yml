@@ -115,13 +115,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    ChargebackListResponse:
-      type: object
-      properties:
-        chargebackCase:
-          type: array
-          items:
-            $ref: '#/components/schemas/Chargeback'
     ChargebackUpdateResponse:
       type: object
       properties:
@@ -129,11 +122,20 @@ components:
           type: integer
           format: int64
           description: Response transaction ID
-    ChargebackResponse:
+    ChargebackListResponse:
       type: object
       properties:
         chargebackCase:
-          $ref: '#/components/schemas/Chargeback'
+          type: array
+          items:
+            $ref: '#/components/schemas/Chargeback'
+    ErrorResponse:
+      type: object
+      properties:
+        response:
+          type: string
+        message:
+          type: string
     Chargeback:
       type: object
       properties:
@@ -180,13 +182,11 @@ components:
         financialImpact:
           type: boolean
           description: Whether this chargeback has a financial impact
-    ErrorResponse:
+    ChargebackResponse:
       type: object
       properties:
-        response:
-          type: string
-        message:
-          type: string
+        chargebackCase:
+          $ref: '#/components/schemas/Chargeback'
     ChargebackResponseRequest:
       type: object
       required:

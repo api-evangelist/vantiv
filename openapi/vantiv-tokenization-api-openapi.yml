@@ -73,6 +73,41 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    RegisterTokenResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        cnpTxnId:
+          type: integer
+          format: int64
+        orderId:
+          type: string
+        response:
+          type: string
+        message:
+          type: string
+        litleToken:
+          type: string
+          description: The generated payment token
+    UpdateCardValidationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        response:
+          type: string
+        message:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        response:
+          type: string
+          description: Error response code
+        message:
+          type: string
+          description: Error message
     RegisterTokenRequest:
       type: object
       required:
@@ -114,50 +149,15 @@ components:
         cardValidationNum:
           type: string
           description: New CVV value
-    RegisterTokenResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        cnpTxnId:
-          type: integer
-          format: int64
-        orderId:
-          type: string
-        response:
-          type: string
-        message:
-          type: string
-        litleToken:
-          type: string
-          description: The generated payment token
-    ErrorResponse:
-      type: object
-      properties:
-        response:
-          type: string
-          description: Error response code
-        message:
-          type: string
-          description: Error message
-    UpdateCardValidationResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        response:
-          type: string
-        message:
-          type: string
   responses:
-    BadRequest:
-      description: Bad request — malformed XML or invalid transaction data
+    Unauthorized:
+      description: Unauthorized — invalid merchant credentials
       content:
         application/xml:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized — invalid merchant credentials
+    BadRequest:
+      description: Bad request — malformed XML or invalid transaction data
       content:
         application/xml:
           schema:

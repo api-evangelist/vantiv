@@ -117,26 +117,19 @@ components:
         application/xml:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Unauthorized
       content:
         application/xml:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    DocumentListResponse:
-      type: object
-      properties:
-        documentList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Document'
     ErrorResponse:
       type: object
       properties:
@@ -162,6 +155,13 @@ components:
         size:
           type: integer
           description: Document size in bytes
+    DocumentListResponse:
+      type: object
+      properties:
+        documentList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
   securitySchemes:
     basicAuth:
       type: http
