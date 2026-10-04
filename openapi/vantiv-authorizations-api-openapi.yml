@@ -49,6 +49,15 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        response:
+          type: string
+          description: Error response code
+        message:
+          type: string
+          description: Error message
     CardType:
       type: object
       description: Payment card details
@@ -72,37 +81,47 @@ components:
         cardValidationNum:
           type: string
           description: CVV/CVV2 security code
-    AddressType:
+    AuthorizationRequest:
       type: object
-      description: Billing address for AVS verification
+      required:
+      - merchantId
+      - id
+      - orderId
+      - amount
+      - orderSource
+      - card
       properties:
-        name:
+        merchantId:
           type: string
-          description: Cardholder name
-        addressLine1:
+          description: Vantiv merchant account identifier
+        id:
           type: string
-          description: Street address
-        city:
+          description: Unique request identifier (max 25 chars)
+        orderId:
           type: string
-          description: City
-        state:
+          description: Merchant order identifier
+        amount:
+          type: integer
+          description: Transaction amount in cents
+        orderSource:
           type: string
-          description: State/province code
-        zip:
-          type: string
-          description: Postal code
-        country:
-          type: string
-          description: Country code (ISO 3166-1 alpha-2)
-    ErrorResponse:
-      type: object
-      properties:
-        response:
-          type: string
-          description: Error response code
-        message:
-          type: string
-          description: Error message
+          enum:
+          - ecommerce
+          - moto
+          - recurring
+          - installment
+          description: Order source channel
+        card:
+          $ref: '#/components/schemas/CardType'
+        billToAddress:
+          $ref: '#/components/schemas/AddressType'
+        customerInfo:
+          type: object
+          properties:
+            ssn:
+              type: string
+            dob:
+              type: string
     AuthorizationResponse:
       type: object
       properties:
@@ -148,47 +167,28 @@ components:
               type: string
             cardValidationResult:
               type: string
-    AuthorizationRequest:
+    AddressType:
       type: object
-      required:
-      - merchantId
-      - id
-      - orderId
-      - amount
-      - orderSource
-      - card
+      description: Billing address for AVS verification
       properties:
-        merchantId:
+        name:
           type: string
-          description: Vantiv merchant account identifier
-        id:
+          description: Cardholder name
+        addressLine1:
           type: string
-          description: Unique request identifier (max 25 chars)
-        orderId:
+          description: Street address
+        city:
           type: string
-          description: Merchant order identifier
-        amount:
-          type: integer
-          description: Transaction amount in cents
-        orderSource:
+          description: City
+        state:
           type: string
-          enum:
-          - ecommerce
-          - moto
-          - recurring
-          - installment
-          description: Order source channel
-        card:
-          $ref: '#/components/schemas/CardType'
-        billToAddress:
-          $ref: '#/components/schemas/AddressType'
-        customerInfo:
-          type: object
-          properties:
-            ssn:
-              type: string
-            dob:
-              type: string
+          description: State/province code
+        zip:
+          type: string
+          description: Postal code
+        country:
+          type: string
+          description: Country code (ISO 3166-1 alpha-2)
   responses:
     Unauthorized:
       description: Unauthorized — invalid merchant credentials

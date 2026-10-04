@@ -114,28 +114,26 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Chargeback case not found
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Bad request
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ChargebackUpdateResponse:
-      type: object
-      properties:
-        transactionId:
-          type: integer
-          format: int64
-          description: Response transaction ID
-    ChargebackListResponse:
-      type: object
-      properties:
-        chargebackCase:
-          type: array
-          items:
-            $ref: '#/components/schemas/Chargeback'
-    ErrorResponse:
-      type: object
-      properties:
-        response:
-          type: string
-        message:
-          type: string
     Chargeback:
       type: object
       properties:
@@ -182,11 +180,13 @@ components:
         financialImpact:
           type: boolean
           description: Whether this chargeback has a financial impact
-    ChargebackResponse:
+    ErrorResponse:
       type: object
       properties:
-        chargebackCase:
-          $ref: '#/components/schemas/Chargeback'
+        response:
+          type: string
+        message:
+          type: string
     ChargebackResponseRequest:
       type: object
       required:
@@ -201,25 +201,25 @@ components:
         note:
           type: string
           description: Optional response note or rebuttal
-  responses:
-    NotFound:
-      description: Chargeback case not found
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Bad request
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+    ChargebackResponse:
+      type: object
+      properties:
+        chargebackCase:
+          $ref: '#/components/schemas/Chargeback'
+    ChargebackUpdateResponse:
+      type: object
+      properties:
+        transactionId:
+          type: integer
+          format: int64
+          description: Response transaction ID
+    ChargebackListResponse:
+      type: object
+      properties:
+        chargebackCase:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chargeback'
   securitySchemes:
     basicAuth:
       type: http

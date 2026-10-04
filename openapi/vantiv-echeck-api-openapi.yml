@@ -73,37 +73,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    EcheckCreditRequest:
-      type: object
-      required:
-      - merchantId
-      - id
-      - cnpTxnId
-      - amount
-      properties:
-        merchantId:
-          type: string
-        id:
-          type: string
-        cnpTxnId:
-          type: integer
-          format: int64
-        amount:
-          type: integer
-    EcheckSaleResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        cnpTxnId:
-          type: integer
-          format: int64
-        orderId:
-          type: string
-        response:
-          type: string
-        message:
-          type: string
     ErrorResponse:
       type: object
       properties:
@@ -113,18 +82,6 @@ components:
         message:
           type: string
           description: Error message
-    EcheckCreditResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        cnpTxnId:
-          type: integer
-          format: int64
-        response:
-          type: string
-        message:
-          type: string
     EcheckSaleRequest:
       type: object
       required:
@@ -159,6 +116,49 @@ components:
             routingNum:
               type: string
               description: Bank routing number
+    EcheckSaleResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        cnpTxnId:
+          type: integer
+          format: int64
+        orderId:
+          type: string
+        response:
+          type: string
+        message:
+          type: string
+    EcheckCreditResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        cnpTxnId:
+          type: integer
+          format: int64
+        response:
+          type: string
+        message:
+          type: string
+    EcheckCreditRequest:
+      type: object
+      required:
+      - merchantId
+      - id
+      - cnpTxnId
+      - amount
+      properties:
+        merchantId:
+          type: string
+        id:
+          type: string
+        cnpTxnId:
+          type: integer
+          format: int64
+        amount:
+          type: integer
   responses:
     Unauthorized:
       description: Unauthorized — invalid merchant credentials

@@ -92,14 +92,14 @@ components:
           type: integer
           description: Refund amount in cents
   responses:
-    BadRequest:
-      description: Bad request — malformed XML or invalid transaction data
+    Unauthorized:
+      description: Unauthorized — invalid merchant credentials
       content:
         application/xml:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-    Unauthorized:
-      description: Unauthorized — invalid merchant credentials
+    BadRequest:
+      description: Bad request — malformed XML or invalid transaction data
       content:
         application/xml:
           schema:

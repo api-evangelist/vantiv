@@ -73,32 +73,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    RegisterTokenResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        cnpTxnId:
-          type: integer
-          format: int64
-        orderId:
-          type: string
-        response:
-          type: string
-        message:
-          type: string
-        litleToken:
-          type: string
-          description: The generated payment token
-    UpdateCardValidationResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        response:
-          type: string
-        message:
-          type: string
     ErrorResponse:
       type: object
       properties:
@@ -128,6 +102,15 @@ components:
         cardValidationNum:
           type: string
           description: CVV (optional, not stored)
+    UpdateCardValidationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        response:
+          type: string
+        message:
+          type: string
     UpdateCardValidationRequest:
       type: object
       required:
@@ -149,6 +132,23 @@ components:
         cardValidationNum:
           type: string
           description: New CVV value
+    RegisterTokenResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        cnpTxnId:
+          type: integer
+          format: int64
+        orderId:
+          type: string
+        response:
+          type: string
+        message:
+          type: string
+        litleToken:
+          type: string
+          description: The generated payment token
   responses:
     Unauthorized:
       description: Unauthorized — invalid merchant credentials

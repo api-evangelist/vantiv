@@ -137,6 +137,13 @@ components:
           type: string
         message:
           type: string
+    DocumentListResponse:
+      type: object
+      properties:
+        documentList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
     DocumentUploadResponse:
       type: object
       properties:
@@ -155,13 +162,6 @@ components:
         size:
           type: integer
           description: Document size in bytes
-    DocumentListResponse:
-      type: object
-      properties:
-        documentList:
-          type: array
-          items:
-            $ref: '#/components/schemas/Document'
   securitySchemes:
     basicAuth:
       type: http
