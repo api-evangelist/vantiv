@@ -202,6 +202,12 @@ apis:
   - type: Documentation
     url: https://developer.vantiv.com/community/point-of-sale/pages/documentation
 common:
+  - type: Plans
+    url: plans/vantiv-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/vantiv-rate-limits.yml
+  - type: FinOps
+    url: finops/vantiv-finops.yml
   - type: AgenticAccess
     url: agentic-access/vantiv-agentic-access.yml
   - type: DomainSecurity
