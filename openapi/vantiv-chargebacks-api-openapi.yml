@@ -115,12 +115,6 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   responses:
-    NotFound:
-      description: Chargeback case not found
-      content:
-        application/xml:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
     Unauthorized:
       description: Unauthorized
       content:
@@ -133,7 +127,53 @@ components:
         application/xml:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
+    NotFound:
+      description: Chargeback case not found
+      content:
+        application/xml:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        response:
+          type: string
+        message:
+          type: string
+    ChargebackListResponse:
+      type: object
+      properties:
+        chargebackCase:
+          type: array
+          items:
+            $ref: '#/components/schemas/Chargeback'
+    ChargebackResponse:
+      type: object
+      properties:
+        chargebackCase:
+          $ref: '#/components/schemas/Chargeback'
+    ChargebackUpdateResponse:
+      type: object
+      properties:
+        transactionId:
+          type: integer
+          format: int64
+          description: Response transaction ID
+    ChargebackResponseRequest:
+      type: object
+      required:
+      - activity
+      properties:
+        activity:
+          type: string
+          enum:
+          - MERCHANT_ACCEPTS
+          - MERCHANT_CONTESTS
+          description: Merchant response type
+        note:
+          type: string
+          description: Optional response note or rebuttal
     Chargeback:
       type: object
       properties:
@@ -180,46 +220,6 @@ components:
         financialImpact:
           type: boolean
           description: Whether this chargeback has a financial impact
-    ErrorResponse:
-      type: object
-      properties:
-        response:
-          type: string
-        message:
-          type: string
-    ChargebackResponseRequest:
-      type: object
-      required:
-      - activity
-      properties:
-        activity:
-          type: string
-          enum:
-          - MERCHANT_ACCEPTS
-          - MERCHANT_CONTESTS
-          description: Merchant response type
-        note:
-          type: string
-          description: Optional response note or rebuttal
-    ChargebackResponse:
-      type: object
-      properties:
-        chargebackCase:
-          $ref: '#/components/schemas/Chargeback'
-    ChargebackUpdateResponse:
-      type: object
-      properties:
-        transactionId:
-          type: integer
-          format: int64
-          description: Response transaction ID
-    ChargebackListResponse:
-      type: object
-      properties:
-        chargebackCase:
-          type: array
-          items:
-            $ref: '#/components/schemas/Chargeback'
   securitySchemes:
     basicAuth:
       type: http

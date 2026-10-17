@@ -49,6 +49,57 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    SaleRequest:
+      type: object
+      required:
+      - merchantId
+      - id
+      - orderId
+      - amount
+      - orderSource
+      - card
+      properties:
+        merchantId:
+          type: string
+        id:
+          type: string
+        orderId:
+          type: string
+        amount:
+          type: integer
+          description: Amount in cents
+        orderSource:
+          type: string
+          enum:
+          - ecommerce
+          - moto
+          - recurring
+        card:
+          $ref: '#/components/schemas/CardType'
+        billToAddress:
+          $ref: '#/components/schemas/AddressType'
+    AddressType:
+      type: object
+      description: Billing address for AVS verification
+      properties:
+        name:
+          type: string
+          description: Cardholder name
+        addressLine1:
+          type: string
+          description: Street address
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State/province code
+        zip:
+          type: string
+          description: Postal code
+        country:
+          type: string
+          description: Country code (ISO 3166-1 alpha-2)
     ErrorResponse:
       type: object
       properties:
@@ -81,35 +132,6 @@ components:
         cardValidationNum:
           type: string
           description: CVV/CVV2 security code
-    SaleRequest:
-      type: object
-      required:
-      - merchantId
-      - id
-      - orderId
-      - amount
-      - orderSource
-      - card
-      properties:
-        merchantId:
-          type: string
-        id:
-          type: string
-        orderId:
-          type: string
-        amount:
-          type: integer
-          description: Amount in cents
-        orderSource:
-          type: string
-          enum:
-          - ecommerce
-          - moto
-          - recurring
-        card:
-          $ref: '#/components/schemas/CardType'
-        billToAddress:
-          $ref: '#/components/schemas/AddressType'
     SaleResponse:
       type: object
       properties:
@@ -130,28 +152,6 @@ components:
           type: string
         cardValidationResult:
           type: string
-    AddressType:
-      type: object
-      description: Billing address for AVS verification
-      properties:
-        name:
-          type: string
-          description: Cardholder name
-        addressLine1:
-          type: string
-          description: Street address
-        city:
-          type: string
-          description: City
-        state:
-          type: string
-          description: State/province code
-        zip:
-          type: string
-          description: Postal code
-        country:
-          type: string
-          description: Country code (ISO 3166-1 alpha-2)
   responses:
     Unauthorized:
       description: Unauthorized — invalid merchant credentials

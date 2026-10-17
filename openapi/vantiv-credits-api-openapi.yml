@@ -49,27 +49,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    CreditResponse:
-      type: object
-      properties:
-        id:
-          type: string
-        cnpTxnId:
-          type: integer
-          format: int64
-        response:
-          type: string
-        message:
-          type: string
-    ErrorResponse:
-      type: object
-      properties:
-        response:
-          type: string
-          description: Error response code
-        message:
-          type: string
-          description: Error message
     CreditRequest:
       type: object
       required:
@@ -91,6 +70,27 @@ components:
         amount:
           type: integer
           description: Refund amount in cents
+    ErrorResponse:
+      type: object
+      properties:
+        response:
+          type: string
+          description: Error response code
+        message:
+          type: string
+          description: Error message
+    CreditResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        cnpTxnId:
+          type: integer
+          format: int64
+        response:
+          type: string
+        message:
+          type: string
   responses:
     Unauthorized:
       description: Unauthorized — invalid merchant credentials

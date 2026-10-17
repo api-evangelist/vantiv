@@ -49,15 +49,6 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        response:
-          type: string
-          description: Error response code
-        message:
-          type: string
-          description: Error message
     CaptureResponse:
       type: object
       properties:
@@ -72,6 +63,15 @@ components:
           type: string
         postDate:
           type: string
+    ErrorResponse:
+      type: object
+      properties:
+        response:
+          type: string
+          description: Error response code
+        message:
+          type: string
+          description: Error message
     CaptureRequest:
       type: object
       required:

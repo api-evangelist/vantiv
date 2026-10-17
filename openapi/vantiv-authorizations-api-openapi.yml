@@ -49,6 +49,73 @@ paths:
           $ref: '#/components/responses/Unauthorized'
 components:
   schemas:
+    AuthorizationResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Request identifier echoed back
+        reportGroup:
+          type: string
+          description: Report group identifier
+        cnpTxnId:
+          type: integer
+          format: int64
+          description: Vantiv-assigned transaction ID for capture/void
+        orderId:
+          type: string
+          description: Merchant order ID echoed back
+        response:
+          type: string
+          description: Response code (000 = approved)
+        responseTime:
+          type: string
+          format: date-time
+          description: Response timestamp
+        postDate:
+          type: string
+          description: Transaction post date
+        message:
+          type: string
+          description: Response message (e.g., Approved)
+        authCode:
+          type: string
+          description: Authorization code from card network
+        avsResult:
+          type: string
+          description: Address verification result code
+        cardValidationResult:
+          type: string
+          description: CVV verification result code
+        fraudResult:
+          type: object
+          properties:
+            avsResult:
+              type: string
+            cardValidationResult:
+              type: string
+    AddressType:
+      type: object
+      description: Billing address for AVS verification
+      properties:
+        name:
+          type: string
+          description: Cardholder name
+        addressLine1:
+          type: string
+          description: Street address
+        city:
+          type: string
+          description: City
+        state:
+          type: string
+          description: State/province code
+        zip:
+          type: string
+          description: Postal code
+        country:
+          type: string
+          description: Country code (ISO 3166-1 alpha-2)
     ErrorResponse:
       type: object
       properties:
@@ -122,73 +189,6 @@ components:
               type: string
             dob:
               type: string
-    AuthorizationResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Request identifier echoed back
-        reportGroup:
-          type: string
-          description: Report group identifier
-        cnpTxnId:
-          type: integer
-          format: int64
-          description: Vantiv-assigned transaction ID for capture/void
-        orderId:
-          type: string
-          description: Merchant order ID echoed back
-        response:
-          type: string
-          description: Response code (000 = approved)
-        responseTime:
-          type: string
-          format: date-time
-          description: Response timestamp
-        postDate:
-          type: string
-          description: Transaction post date
-        message:
-          type: string
-          description: Response message (e.g., Approved)
-        authCode:
-          type: string
-          description: Authorization code from card network
-        avsResult:
-          type: string
-          description: Address verification result code
-        cardValidationResult:
-          type: string
-          description: CVV verification result code
-        fraudResult:
-          type: object
-          properties:
-            avsResult:
-              type: string
-            cardValidationResult:
-              type: string
-    AddressType:
-      type: object
-      description: Billing address for AVS verification
-      properties:
-        name:
-          type: string
-          description: Cardholder name
-        addressLine1:
-          type: string
-          description: Street address
-        city:
-          type: string
-          description: City
-        state:
-          type: string
-          description: State/province code
-        zip:
-          type: string
-          description: Postal code
-        country:
-          type: string
-          description: Country code (ISO 3166-1 alpha-2)
   responses:
     Unauthorized:
       description: Unauthorized — invalid merchant credentials
